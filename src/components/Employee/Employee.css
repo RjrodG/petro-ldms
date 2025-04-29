@@ -1,0 +1,281 @@
+.employee-container {
+  background: white;
+  width: 100%;       /* Fill entire main content */
+  height: 100%;
+  max-width: none;    /* Remove max width */
+  border-radius: 0;   /* Remove rounded corners */
+  box-shadow: none;   /* Remove shadow */
+  box-sizing: border-box; /* Ensure padding fits inside */
+}
+
+.employee-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.employee-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.button-container {
+  display: flex; /* Use flexbox to align buttons */
+  align-items: center; /* Vertically center the buttons */
+}
+
+.add-employee-btn {
+  background-color: #00bf63;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 8px; /* Add spacing between the buttons */
+}
+
+.add-employee-btn:hover {
+  background-color: #00994d;
+}
+
+.upload-employee-btn {
+  background-color: #1878e6;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.upload-employee-btn:hover {
+  background-color: #125aac;
+}
+
+
+.employee-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  height: calc(100% - 100px); /* Adjusted height */
+  overflow-y: auto;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: separate; /* Use separate borders for better control */
+  border-spacing: 0;
+  min-width: 600px;
+}
+
+.employee-table th,
+.employee-table td {
+  padding: 12px 15px;
+  border: none; /* Remove all borders */
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd; /* Only bottom border */
+}
+
+.employee-table th {
+  color: #555;
+  border-bottom: 2px solid #ccc; /* Slightly thicker bottom border for header */
+}
+
+.actions-column {
+  width: 140px;
+  text-align: center;
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+.action-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0 5px;
+  font-size: 1.1rem;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.action-btn.view {
+  color: #007bff;
+}
+
+.action-btn.view:hover {
+  background-color: #e6f0ff;
+}
+
+.action-btn.update {
+  color: #ffc107;
+}
+
+.action-btn.update:hover {
+  background-color: #fff3cd;
+}
+
+.action-btn.delete {
+  color: #dc3545;
+}
+
+.action-btn.delete:hover {
+  background-color: #f8d7da;
+}
+
+/* Modal styles */
+.employee-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.employee-modal {
+  background: #fff;
+  padding: 32px 40px;
+  border-radius: 8px;
+  min-width: 350px;
+  max-width: 95vw;
+  width: 500px; /* Larger modal on desktop */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (max-width: 700px) {
+  .employee-modal {
+    min-width: 90vw;
+    width: 98vw;
+    padding: 16px;
+  }
+}
+
+.employee-modal h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+  color: #00bf63;
+}
+
+.employee-modal label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.employee-modal input {
+  margin-top: 4px;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.employee-modal select {
+  margin-top: 4px;
+  padding: 8px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  appearance: none; /* Remove default arrow for consistent styling */
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.employee-modal button[type="button"] {
+  width: 20%;
+  background-color: #dc3545; /* Bootstrap danger red */
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.employee-modal button[type="button"]:hover,
+.employee-modal button[type="button"]:focus {
+  background-color: #af2634;
+  outline: none;
+}
+
+.employee-modal button[type="submit"] {
+  width: 20%;
+  background-color: #00994d; /* Bootstrap danger red */
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.employee-modal button[type="submit"]:hover,
+.employee-modal button[type="submit"]:focus {
+  background-color: #076637;
+  outline: none;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+@media (max-width: 700px) {
+  .employee-container {
+    padding: 8px;
+    max-width: 100vw;
+  }
+
+  .employee-modal {
+    min-width: 90vw;
+    padding: 16px;
+  }
+
+  .employee-table {
+    min-width: 400px;
+  }
+}
+
+.employee-searchbar {
+  margin-bottom: 16px;
+}
+
+.employee-searchbar input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.employee-searchbar input:focus {
+  border-color: #00bf63;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 191, 99, 0.5);
+}
