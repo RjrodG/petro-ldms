@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { RiLogoutCircleLine } from "react-icons/ri";
 import {
   FaUserCircle,
   FaTachometerAlt,
@@ -147,14 +148,23 @@ const Sidebar = () => {
                   <FaBuilding className="sidebar-icon" /> Out-house
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/intervention/out-house"
+                  className={({ isActive }) =>
+                    isActive ? 'sidebar-link active' : 'sidebar-link'
+                  }
+                >
+                  <FaBuilding className="sidebar-icon" /> Competency
+                </NavLink>
+              </li>
             </ul>
           )}
         </li>
       </ul>
 
       <button className="signout-button-sidebar" onClick={handleSignOut}>
-        <FaSignOutAlt className="sidebar-icon" />
-        Sign Out
+        <RiLogoutCircleLine className="sidebar-icon" />
       </button>
     </div>
   );

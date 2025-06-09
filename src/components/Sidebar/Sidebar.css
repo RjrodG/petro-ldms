@@ -84,12 +84,11 @@
 }
 
 /* Sign Out Button */
-.signout-button-sidebar {
-  width: 80%;
-  background-color: #dc3545; /* Bootstrap danger red */
+.signout-button-sidebar { 
+  background-color: #fff; /* Bootstrap danger red */
   color: white;
   border: none;
-  padding: 14px 32px;
+  padding: 12px 12px;
   font-size: 1rem;
   cursor: pointer;
   display: flex;
@@ -97,15 +96,16 @@
   justify-content: center;
   border-radius: 10px;
   transition: background-color 0.3s ease;
-  margin: 20px;
+  margin: 10px;
 }
 
-.signout-button-sidebar:hover {
-  background-color: #c82333;
+.signout-button-sidebar:hover .sidebar-icon {
+  color: #761620;
 }
 
 .signout-button-sidebar .sidebar-icon {
-  margin-right: 8px;
+  justify-content: center;
   font-size: 1.2rem;
+  color:#c82333;
 }
   
