@@ -15,6 +15,7 @@ import {
   FaHeartbeat,
   FaUserNurse,     
   FaClinicMedical,
+  FaChartBar 
 } from 'react-icons/fa';
 import './Sidebar.css';
 
@@ -34,7 +35,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="sidebar-user">
         <FaUserCircle size={64} />
-        <div className="sidebar-username">User Name</div>
+        <h3 className="sidebar-username">User Name</h3>
       </div>
       <ul className="sidebar-menu">
         <li>
@@ -44,7 +45,7 @@ const Sidebar = () => {
               isActive ? 'sidebar-link active' : 'sidebar-link'
             }
           >
-            <FaTachometerAlt className="sidebar-icon" /> Dashboard
+            <FaChartBar  className="sidebar-icon" /> Dashboard
           </NavLink>
         </li>
         <li>

@@ -212,7 +212,18 @@ const DashboardHome = () => {
                 {/* Row 3 */}
                 <div className="card card-xwide">
                     <h4>Percentage per Division</h4>
-                    <Doughnut data={divisionPercentages} options={{ responsive: true }} />
+                    <div style={{ width: "100%", height: "220px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                      <Doughnut
+                        data={divisionPercentages}
+                        options={{
+                          responsive: true,
+                          maintainAspectRatio: false,
+                          plugins: {
+                            legend: { position: "right" }
+                          }
+                        }}
+                      />
+                    </div>
                 </div>
                 <div className="card card-xwide">
                     <h4>Training Conducted</h4>

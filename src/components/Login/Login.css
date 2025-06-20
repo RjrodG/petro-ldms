@@ -16,11 +16,10 @@
   
   .container {
     display: flex;
-    width: 1000px;
-    max-width: 1400px;
+    width: 1200px;
     height: 70vh;
     background: #fff;
-    border-radius: 30px;
+    border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
   }
@@ -83,7 +82,7 @@
     width: 100%;
     padding: 0.8rem;
     margin-top: 1rem;
-    background: #078234;
+    background: #00bf63;
     color: white;
     border: none;
     border-radius: 5px;
@@ -92,7 +91,7 @@
   }
   
   .form-container button:hover {
-    background: #00bf63;
+    background: #00994d;
   }
   
   /* Right Section */

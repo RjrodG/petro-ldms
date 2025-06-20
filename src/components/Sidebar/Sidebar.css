@@ -17,13 +17,12 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 32px;
-  color: #078234;
+  color: #00bf63;
 }
 
 .sidebar-username {
-  margin-top: 8px;
+  margin-top: 12px;
   font-weight: 600;
-  font-size: 1.1rem;
   color: #222;
 }
 
