@@ -39,10 +39,12 @@
   border-collapse: separate;
   border-spacing: 0;
   min-width: 600px;
+  table-layout: fixed;
 }
 
 .employee-table th,
 .employee-table td {
+  font-size: 12px;
   padding: 12px 15px;
   border: none;
   text-align: left;
@@ -53,6 +55,15 @@
 .employee-table th {
   color: #555;
   border-bottom: 2px solid #ccc;
+}
+
+.employee-table th:first-child,
+.employee-table td:first-child {
+  width: 40px;
+}
+.employee-table th:nth-child(2),
+.employee-table td:nth-child(2) {
+  width: 180px;
 }
 
 .actions-column {
@@ -446,15 +457,11 @@
   display: flex;
   flex-direction: column;
 }
-.idp-input {
-  width: 100%;
-  padding: 8px 12px;
+.idp-input-strength, .idp-input-gap {
+  width: 90%;
+  padding: 5px 5px;
   border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-top: 4px;
-  margin-bottom: 8px;
   font-size: 0.9rem;
-  box-sizing: border-box;
 }
 .idp-list {
   display: flex;
@@ -530,15 +537,37 @@
   margin-top: 8px;
 }
 
+.employee-header-row {
+  margin-bottom: 20px;
+}
+
+.employee-header-row h2 {
+  margin: 0 0 8px 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.employee-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-bottom: 18px;
+}
+
 /* =========================
    Searchbar
    ========================= */
 .employee-searchbar {
-  margin-bottom: 16px;
+  position: relative;
+  display: inline-block;
+  width: 500px;
+  margin-right: auto; /* Pushes buttons to the right */
 }
 .employee-searchbar input {
   width: 100%;
   padding: 10px 14px;
+  padding-right: 28px; 
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 0.9rem;
@@ -549,6 +578,24 @@
   border-color: #00bf63;
   outline: none;
   box-shadow: 0 0 5px rgba(0, 191, 99, 0.5);
+}
+.clear-search-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #fa7e7e;
+  padding: 0;
+  line-height: 1;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* =========================
@@ -619,7 +666,7 @@
 /* =========================
    Success Notification
    ========================= */
-.success-notification {
+.success-add-notif {
   position: fixed;
   top: 30px;
   right: 30px;  
@@ -635,11 +682,39 @@
   align-items: center;
   gap: 10px;
 }
-.success-notification strong {
-  font-size: 1.1em;
-  margin-right: 8px;
+.success-update-notif {
+  position: fixed;
+  top: 30px;
+  right: 30px;  
+  background: #ffc107;
+  color: #fff;
+  padding: 18px 28px 18px 48px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  font-size: 1.1rem;
+  z-index: 9999;
+  min-width: 320px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.success-notification .close-btn {
+.success-delete-notif {
+  position: fixed;
+  top: 30px;
+  right: 30px;  
+  background: #dc3546;
+  color: #fff;
+  padding: 18px 28px 18px 48px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  font-size: 1.1rem;
+  z-index: 9999;
+  min-width: 320px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.close-btn {
   background: none;
   border: none;
   color: #fff;
@@ -685,34 +760,28 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+.part3-set {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  grid-template-rows: repeat(6, auto);
+  column-gap: 24px;
+  row-gap: 0;
+  background: #fafbfc;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  align-items: start;
+}
 
-/* Success notification styles */
-.success-notification {
-  position: fixed;
-  top: 30px;
-  right: 30px;
-  background: #4cd964;
-  color: #fff;
-  padding: 18px 28px 18px 48px;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  font-size: 1.1rem;
-  z-index: 9999;
-  min-width: 320px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.success-notification strong {
-  font-size: 1.1em;
-  margin-right: 8px;
-}
-.success-notification .close-btn {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.3em;
-  margin-left: auto;
-  cursor: pointer;
-  line-height: 1;
+.idp-desc {
+  width:100%;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }

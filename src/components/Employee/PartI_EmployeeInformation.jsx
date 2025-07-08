@@ -1,6 +1,10 @@
-import CompetencyAssessment from './PartII_CompetencyAssessmentSection';
+import CompetencyAssessment from './PartII_CompetencyAssessment';
 import LearningAndDevelopment from './PartIII_LearningAndDevelopmentSection';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { formatDateDisplay } from './Employee';
 import { FaChevronRight } from "react-icons/fa";
+import Select from 'react-select';
 
 const PartI_EmployeeInformation = ({
   modal,
@@ -12,6 +16,8 @@ const PartI_EmployeeInformation = ({
   departmentOptions,
   classificationOptions,
   statusOptions,
+  professionOptions,
+  supervisorOptions,
   showCompetencyAssessment,
   setShowCompetencyAssessment,
   strengths,
@@ -28,6 +34,9 @@ const PartI_EmployeeInformation = ({
   addPart3Set,
   removePart3Set,
   updatePart3Field,
+  description,
+  setDescription,
+  competencyOptions
 }) => (
   <div className="employee-modal-backdrop" onClick={closeModal}>
     <div className="employee-modal" onClick={e => e.stopPropagation()}>
@@ -60,7 +69,7 @@ const PartI_EmployeeInformation = ({
                     />
                   )}
                 </td>
-                <td><strong>j. Year Period</strong></td>
+                <td><strong>k. Year Period</strong></td>
                 <td>
                   {modal.type === 'view' ? (
                     modal.employee.emp_yearperiod || 'N/A'
@@ -94,24 +103,24 @@ const PartI_EmployeeInformation = ({
                     </select>
                   )}
                 </td>
-                <td><strong>k. Division</strong></td>
-                <td>
-                  {modal.type === 'view' ? (
-                    modal.employee.emp_division || 'N/A'
-                  ) : (
-                    <select
-                      name="emp_division"
-                      value={modal.employee.emp_division || ''}
-                      onChange={handleChange}
-                      required
-                    >
-                      <option value="">Select Division</option>
-                      {divisionOptions.map(div => (
-                        <option key={div.dep_id} value={div.dep_division}>{div.dep_division}</option>
-                      ))}
-                    </select>
-                  )}
-                </td>
+                <td><strong>l. Division</strong></td>
+                  <td>
+                    {modal.type === 'view' ? (
+                      modal.employee.emp_div || 'N/A'
+                    ) : (
+                      <select
+                        name="emp_div"
+                        value={modal.employee.emp_div || ''}
+                        onChange={handleChange}
+                        required
+                      >
+                        <option value="">Select Division</option>
+                        {divisionOptions.map(div => (
+                          <option key={div.dep_id} value={div.dep_division}>{div.dep_division}</option>
+                        ))}
+                      </select>
+                    )}
+                  </td>
               </tr>
               <tr>
                 <td><strong>c. Salary Grade</strong></td>
@@ -127,7 +136,7 @@ const PartI_EmployeeInformation = ({
                       />
                     )}
                   </td>
-                <td><strong>l. ID Number</strong></td>
+                <td><strong>m. ID Number</strong></td>
                 <td>
                   {modal.type === 'view' ? (
                     modal.employee.emp_idnumber || 'N/A'
@@ -155,18 +164,29 @@ const PartI_EmployeeInformation = ({
                     />
                   )}
                 </td>
-                <td><strong>m. Start Date</strong></td>
+                <td><strong>n. Start Date</strong></td>
                 <td>
-                  {modal.type === 'view' ? (
-                    modal.employee.emp_sdatecurrentpos || 'N/A'
-                  ) : (
-                    <input
-                      type="date"
-                      name="emp_sdatecurrentpos"
-                      value={modal.employee.emp_sdatecurrentpos}
-                      onChange={handleChange}
-                    />
-                  )}
+                  {modal.type === 'view'
+                    ? formatDateDisplay(modal.employee.emp_sdatecurrentpos)
+                    : (
+                      <DatePicker
+                        selected={modal.employee.emp_sdatecurrentpos ? new Date(modal.employee.emp_sdatecurrentpos) : null}
+                        onChange={date =>
+                          handleChange({
+                            target: {
+                              name: "emp_sdatecurrentpos",
+                              value: date ? date.toISOString().slice(0, 10) : ""
+                            }
+                          })
+                        }
+                        dateFormat="dd/MM/yyyy"
+                        placeholderText="dd/mm/yyyy"
+                        showMonthDropdown
+                        showYearDropdown
+                        dropdownMode="select"
+                      />
+                    )
+                  }
                 </td>
               </tr>
               <tr>
@@ -183,18 +203,29 @@ const PartI_EmployeeInformation = ({
                     />
                   )}
                 </td>
-                <td><strong>n. Start Date for Occupying a Plantilla</strong></td>
+                <td><strong>o. Start Date for Occupying a Plantilla</strong></td>
                 <td>
-                  {modal.type === 'view' ? (
-                    modal.employee.emp_sdateplantpos || 'N/A'
-                  ) : (
-                    <input
-                      type="date"
-                      name="emp_sdateplantpos"
-                      value={modal.employee.emp_sdateplantpos}
-                      onChange={handleChange}
-                    />
-                  )}
+                  {modal.type === 'view'
+                    ? formatDateDisplay(modal.employee.emp_sdateplantpos)
+                    : (
+                      <DatePicker
+                        selected={modal.employee.emp_sdateplantpos ? new Date(modal.employee.emp_sdateplantpos) : null}
+                        onChange={date =>
+                          handleChange({
+                            target: {
+                              name: "emp_sdateplantpos",
+                              value: date ? date.toISOString().slice(0, 10) : ""
+                            }
+                          })
+                        }
+                        dateFormat="dd/MM/yyyy"
+                        placeholderText="dd/mm/yyyy"
+                        showMonthDropdown
+                        showYearDropdown
+                        dropdownMode="select"
+                      />
+                    )
+                  }
                 </td>
               </tr>
               <tr>
@@ -216,16 +247,24 @@ const PartI_EmployeeInformation = ({
                     </select>
                   )}
                 </td>
-                <td><strong>o. Immediate Supervisor's Name (Last, First Ext, Middle)</strong></td>
+                <td><strong>p. Immediate Supervisor's Name (Last, First Ext, Middle)</strong></td>
                 <td>
                   {modal.type === 'view' ? (
                     modal.employee.emp_supervisor || 'N/A'
                   ) : (
-                    <input
-                      type="text"
+                    <Select
                       name="emp_supervisor"
-                      value={modal.employee.emp_supervisor || ''}
-                      onChange={handleChange}
+                      value={
+                        supervisorOptions.find(opt => opt.emp_name === modal.employee.emp_supervisor) || null
+                      }
+                      onChange={option => handleChange({
+                        target: { name: 'emp_supervisor', value: option ? option.emp_name : '' }
+                      })}
+                      options={supervisorOptions}
+                      getOptionLabel={opt => opt.emp_name}
+                      getOptionValue={opt => opt.emp_name}
+                      placeholder="Select or type Immediate Supervisor"
+                      isClearable
                     />
                   )}
                 </td>
@@ -260,7 +299,7 @@ const PartI_EmployeeInformation = ({
                     </div>
                   )}
                 </td>
-                <td><strong>p. Email Address</strong></td>
+                <td><strong>q. Email Address</strong></td>
                 <td>
                   {modal.type === 'view' ? (
                     modal.employee.emp_email || 'N/A'
@@ -285,11 +324,10 @@ const PartI_EmployeeInformation = ({
                       name="emp_contact"
                       value={modal.employee.emp_contact}
                       onChange={handleChange}
-                      required
                     />
                   )}
                 </td>
-                <td><strong>q. Status</strong></td>
+                <td><strong>r. Status</strong></td>
                 <td>
                   {modal.type === 'view' ? (
                     modal.employee.emp_status || 'N/A'
@@ -309,7 +347,55 @@ const PartI_EmployeeInformation = ({
                 </td>
               </tr>
               <tr>
-                <td><strong>i. Classification</strong></td>
+                <td><strong>i. Date of Birth</strong></td>
+                <td>
+                  {modal.type === 'view' ? (
+                    formatDateDisplay(modal.employee.emp_dateofbirth)
+                  ) : (
+                    <DatePicker
+                      selected={modal.employee.emp_dateofbirth ? new Date(modal.employee.emp_dateofbirth) : null}
+                      onChange={date =>
+                        handleChange({
+                          target: {
+                            name: "emp_dateofbirth",
+                            value: date ? date.toISOString().slice(0, 10) : ""
+                          }
+                        })
+                      }
+                      dateFormat="dd/MM/yyyy"
+                      placeholderText="dd/mm/yyyy"
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                    />
+                  )}
+                </td>
+                <td><strong>s. Date of Entry</strong></td>
+                <td>
+                  {modal.type === 'view' ? (
+                    formatDateDisplay(modal.employee.emp_dateofentry)
+                  ) : (
+                    <DatePicker
+                      selected={modal.employee.emp_dateofentry ? new Date(modal.employee.emp_dateofentry) : null}
+                      onChange={date =>
+                        handleChange({
+                          target: {
+                            name: "emp_dateofentry",
+                            value: date ? date.toISOString().slice(0, 10) : ""
+                          }
+                        })
+                      }
+                      dateFormat="dd/MM/yyyy"
+                      placeholderText="dd/mm/yyyy"
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                    />
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <td><strong>j. Classification</strong></td>
                 <td>
                   {modal.type === 'view' ? (
                     modal.employee.emp_classification || 'N/A'
@@ -327,7 +413,7 @@ const PartI_EmployeeInformation = ({
                     </select>
                   )}
                 </td>
-                <td><strong>r. With Profession?</strong></td>
+                <td><strong>t. With Profession?</strong></td>
                 <td>
                   {modal.type === 'view' ? (
                     modal.employee.with_prof || 'N/A'
@@ -370,12 +456,12 @@ const PartI_EmployeeInformation = ({
                           name="emp_prof"
                           value={modal.employee.emp_prof}
                           onChange={handleChange}
+                          required
                         >
                           <option value="">Select Profession</option>
-                          <option value="Nurse">Nurse</option>
-                          <option value="Doctor">Doctor</option>
-                          <option value="Engineer">Engineer</option>
-                          {/* Add more as needed */}
+                          {professionOptions.map(prof => (
+                            <option key={prof.prof_id} value={prof.prof_name}>{prof.prof_name}</option>
+                          ))}
                         </select>
                       )}
                     </td>
@@ -411,13 +497,23 @@ const PartI_EmployeeInformation = ({
                     <td><strong>• PRC Expiration Date</strong></td>
                     <td>
                       {modal.type === 'view' ? (
-                        modal.employee.emp_prcexpdate || 'N/A'
+                        formatDateDisplay(modal.employee.emp_prcexpdate)
                       ) : (
-                        <input
-                          type="date"
-                          name="emp_prcexpdate"
-                          value={modal.employee.emp_prcexpdate}
-                          onChange={handleChange}
+                        <DatePicker
+                          selected={modal.employee.emp_prcexpdate ? new Date(modal.employee.emp_prcexpdate) : null}
+                          onChange={date =>
+                            handleChange({
+                              target: {
+                                name: "emp_prcexpdate",
+                                value: date ? date.toISOString().slice(0, 10) : ""
+                              }
+                            })
+                          }
+                          dateFormat="dd/MM/yyyy"
+                          placeholderText="dd/mm/yyyy"
+                          showMonthDropdown
+                          showYearDropdown
+                          dropdownMode="select"
                         />
                       )}
                     </td>
@@ -440,6 +536,10 @@ const PartI_EmployeeInformation = ({
           addGap={addGap}
           removeGap={removeGap}
           updateGap={updateGap}
+          description={description}
+          setDescription={setDescription}
+          competencyOptions={competencyOptions}
+          modal={modal}
         />
 
         {/* PART III */}
