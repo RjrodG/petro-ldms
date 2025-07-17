@@ -46,26 +46,32 @@ const PartII_CompetencyAssessment = ({
               <div className="idp-col" style={{flex: 1}}>
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: 4 }}>
                 <label style={{ flex: 1 }}>b. Area/s of Strength</label>
-                {strengths.length < 5 && (
+                {modal && modal.type !== 'view' && strengths.length < 5 && (
                   <button type="button" className='idp-p2-add-btn' onClick={addStrength}> + Add Strength </button>
                 )}
               </div>
               {strengths.map((value, idx) => (
                 <div className="idp-list" key={idx} style={{display: 'flex', alignItems: 'center', marginBottom: 4}}>
-                  <Select
-                    className="idp-input-strength"
-                    value={competencyOptions.find(opt => opt.comp_title === value) || null}
-                    onChange={selected => updateStrength(idx, selected ? selected.comp_title : "")}
-                    options={competencyOptions}
-                    getOptionLabel={opt => opt.comp_title}
-                    getOptionValue={opt => opt.comp_title}
-                    placeholder="Select Strength"
-                    isClearable
-                    required
-                  />
-                    {strengths.length > 1 && (
-                      <button type="button" className="idp-p2-remove-btn" onClick={() => removeStrength(idx)} style={{marginLeft: 4}}>×</button>
-                    )}
+                  {modal && modal.type === 'view' ? (
+                    <div style={{flex: 1, padding: '8px 0', fontSize: '0.9rem', borderBottom: '1px solid #ccc', marginLeft: '12px'}}>
+                      {value || 'N/A'}
+                    </div>
+                  ) : (
+                    <Select
+                      className="idp-input-strength"
+                      value={competencyOptions.find(opt => opt.comp_title.trim().toLowerCase() === value.trim().toLowerCase()) || null}
+                      onChange={selected => updateStrength(idx, selected ? selected.comp_title : "")}
+                      options={competencyOptions}
+                      getOptionLabel={opt => opt.comp_title}
+                      getOptionValue={opt => opt.comp_title}
+                      placeholder="Select Strength"
+                      isClearable
+                      required
+                    />
+                  )}
+                  {modal && modal.type !== 'view' && strengths.length > 1 && (
+                    <button type="button" className="idp-p2-remove-btn" onClick={() => removeStrength(idx)} style={{marginLeft: 4}}>×</button>
+                  )}
                 </div>
               ))}
             </div>
@@ -73,26 +79,32 @@ const PartII_CompetencyAssessment = ({
             <div className="idp-col" style={{flex: 1}}>
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: 4 }}>
                 <label style={{ flex: 1 }}>c. Area/s for Growth or Performance Gap</label>
-                {gaps.length < 5 && (
+                {modal && modal.type !== 'view' && gaps.length < 5 && (
                   <button type="button" className='idp-p2-add-btn' onClick={addGap}> + Add Gap </button>
                 )}
               </div>
               {gaps.map((value, idx) => (
                 <div className="idp-list" key={idx} style={{display: 'flex', alignItems: 'center', marginBottom: 4}}>
-                  <Select
-                    className="idp-input-gap"
-                    value={competencyOptions.find(opt => opt.comp_title === value) || null}
-                    onChange={selected => updateGap(idx, selected ? selected.comp_title : "")}
-                    options={competencyOptions}
-                    getOptionLabel={opt => opt.comp_title}
-                    getOptionValue={opt => opt.comp_title}
-                    placeholder="Select Gap"
-                    isClearable
-                    required
-                  />
-                    {gaps.length > 1 && (
-                      <button type="button" className="idp-p2-remove-btn" onClick={() => removeGap(idx)} style={{marginLeft: 4}}>×</button>
-                    )}
+                  {modal && modal.type === 'view' ? (
+                    <div style={{flex: 1, padding: '8px 0', fontSize: '0.9rem', borderBottom: '1px solid #ccc', marginLeft: '12px'}}>
+                      {value || 'N/A'}
+                    </div>
+                  ) : (
+                    <Select
+                      className="idp-input-gap"
+                      value={competencyOptions.find(opt => opt.comp_title.trim().toLowerCase() === value.trim().toLowerCase()) || null}
+                      onChange={selected => updateGap(idx, selected ? selected.comp_title : "")}
+                      options={competencyOptions}
+                      getOptionLabel={opt => opt.comp_title}
+                      getOptionValue={opt => opt.comp_title}
+                      placeholder="Select Gap"
+                      isClearable
+                      required
+                    />
+                  )}
+                  {modal && modal.type !== 'view' && gaps.length > 1 && (
+                    <button type="button" className="idp-p2-remove-btn" onClick={() => removeGap(idx)} style={{marginLeft: 4}}>×</button>
+                  )}
                 </div>
               ))}
             </div>

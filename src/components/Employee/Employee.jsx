@@ -224,6 +224,23 @@ const Employee = (props) => {
             console.error('Error fetching description:', err);
           }
         }
+
+        // Fetch strengths and gaps from backend
+        try {
+          const res = await axios.get(`/api/employees/${employee.emp_id}/competencies`);
+          // If strengths/gaps are IDs or objects, map them to comp_title
+          const mapToTitle = (arr) => {
+            if (!Array.isArray(arr)) return [];
+            return arr.map(item => typeof item === "string" ? item.trim() : item);
+          };
+
+          setStrengths(res.data.strengths && res.data.strengths.length ? mapToTitle(res.data.strengths) : []);
+          setGaps(res.data.gaps && res.data.gaps.length ? mapToTitle(res.data.gaps) : []);
+        } catch (err) {
+          setStrengths(['']);
+          setGaps(['']);
+          console.error('Error fetching strengths and gaps:', err);
+        }
       }
     }
     setModal({ type, open: true, employee: emp });
