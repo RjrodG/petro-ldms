@@ -802,3 +802,58 @@ input.dateCompleted {
   width: 100%;
   box-sizing: border-box;
 }
+
+.idp-tab-control {
+  margin: 0 0 1rem 0;
+}
+
+.idp-tabs {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.idp-tab {
+  flex: 1 1 0;
+  padding: 0.7rem 1.5rem;
+  background: #fff;
+  color: #222;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-right: 1px solid #ccc;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  text-align: left;
+}
+
+.idp-tab:last-child {
+  border-right: none;
+}
+
+.idp-tab.active {
+  background: #179e3b;
+  color: #fff;
+  font-weight: bold;
+}
+
+.idp-tab:not(.active) {
+  background: #fff;
+  color: #222;
+}
+
+.idp-tab-content {
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 1.5rem; /* Reduced top padding */
+  background: #fff;
+  margin-top: 0; /* Ensure no extra margin */
+}
+
+/* Optionally, remove margin-top from the first child in the tab content if present */
+.idp-tab-content > *:first-child {
+  margin-top: 0 !important;
+}
