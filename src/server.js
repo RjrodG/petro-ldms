@@ -316,6 +316,52 @@ app.post('/api/employees/:id/competencies', async (req, res) => {
   }
 });
 
+
+// Get employee learning and development plans
+app.get('/api/employees/:id/ldplan', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const [rows] = await db.query('SELECT * FROM employee_ldplan WHERE emp_id = ?', [id]);
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch learning and development plans' });
+  }
+});
+// Add employee learning and development plan
+app.post('/api/employees/:id/ldplan', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { ldplans } = req.body; // ldplans should be an array of objects
+
+    // Remove old plans for this employee (optional, if you want to replace)
+    await db.query('DELETE FROM employee_ldplan WHERE emp_id = ?', [id]);
+
+    // Insert new plans
+    if (ldplans && ldplans.length) {
+      const values = ldplans.map(plan => [
+        plan.empl_id, // or null if auto-increment
+        id,
+        plan.empl_development,
+        plan.empl_expected,
+        plan.empl_support,
+        plan.empl_budget,
+        plan.empl_resources,
+        plan.empl_datecompleteed
+      ]);
+      await db.query(
+        'INSERT INTO employee_ldplan (empl_id, emp_id, empl_development, empl_expected, empl_support, empl_budget, empl_resources, empl_datecompleteed) VALUES ?',
+        [values]
+      );
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to save learning and development plans' });
+  }
+});
+
 // Start server
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

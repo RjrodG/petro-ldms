@@ -766,12 +766,24 @@
   grid-template-rows: repeat(6, auto);
   column-gap: 24px;
   row-gap: 0;
-  background: #fafbfc;
+  background: #fff;
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
   margin-top: 10px;
   align-items: start;
+  font-size: 0.9rem;
+}
+.part3-label {
+  margin-bottom: 4px;
+  margin-top: 4px;
+}
+.part3-readonly {
+  width: 100%;
+  padding: 6px 0;
+  margin-left: 16px;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
 }
 
 .idp-desc {
@@ -784,4 +796,9 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+input.dateCompleted {
+  width: 100%;
+  box-sizing: border-box;
 }

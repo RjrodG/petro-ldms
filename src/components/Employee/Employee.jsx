@@ -241,6 +241,38 @@ const Employee = (props) => {
           setGaps(['']);
           console.error('Error fetching strengths and gaps:', err);
         }
+        // Fetch learning and development plans from backend
+        try {
+          const res = await axios.get(`/api/employees/${employee.emp_id}/ldplan`);
+          setPart3Sets(
+            res.data.length
+              ? res.data.map(plan => ({
+                  developmentActivity: plan.empl_development || '',
+                  expectedOutput: plan.empl_expected || '',
+                  supportNeeded: plan.empl_support || '',
+                  budgetSource: plan.empl_resources || '',
+                  budgetNeeded: plan.empl_budget || '',
+                  dateCompleted: plan.empl_datecompleteed || ''
+                }))
+              : [{
+                  developmentActivity: '',
+                  expectedOutput: '',
+                  supportNeeded: '',
+                  budgetSource: '',
+                  budgetNeeded: '',
+                  dateCompleted: ''
+                }]
+          );
+        } catch (err) {
+          setPart3Sets([{
+            developmentActivity: '',
+            expectedOutput: '',
+            supportNeeded: '',
+            budgetSource: '',
+            budgetNeeded: '',
+            dateCompleted: ''
+          }]);
+        }
       }
     }
     setModal({ type, open: true, employee: emp });
@@ -330,6 +362,21 @@ const Employee = (props) => {
         } catch (err) {
           console.error('Error saving strengths and gaps (add):', err);
         }
+        // 4. Save learning and development plans (add)
+        try {
+          const ldplans = part3Sets.map(set => ({
+            empl_id: null, // or omit if auto-increment
+            empl_development: set.developmentActivity,
+            empl_expected: set.expectedOutput,
+            empl_support: set.supportNeeded,
+            empl_budget: set.budgetNeeded,
+            empl_resources: set.budgetSource,
+            empl_datecompleteed: set.dateCompleted ? set.dateCompleted : null
+          }));
+          await axios.post(`/api/employees/${newEmpId}/ldplan`, { ldplans });
+        } catch (err) {
+          console.error('Error saving learning and development plans (add):', err);
+        }
 
         setShowAddSuccess(true);
         setTimeout(() => setShowAddSuccess(false), 4000);
@@ -370,6 +417,21 @@ const Employee = (props) => {
           });
         } catch (err) {
           console.error('Error saving strengths and gaps (update):', err);
+        }
+        // 4. Save learning and development plans (update)
+        try {
+          const ldplans = part3Sets.map(set => ({
+            empl_id: null, // or omit if auto-increment
+            empl_development: set.developmentActivity,
+            empl_expected: set.expectedOutput,
+            empl_support: set.supportNeeded,
+            empl_budget: set.budgetNeeded,
+            empl_resources: set.budgetSource,
+            empl_datecompleteed: set.dateCompleted ? set.dateCompleted : null
+          }));
+          await axios.post(`/api/employees/${modal.employee.emp_id}/ldplan`, { ldplans });
+        } catch (err) {
+          console.error('Error saving learning and development plans (update):', err);
         }
 
         setUShowUpdateSuccess(true);

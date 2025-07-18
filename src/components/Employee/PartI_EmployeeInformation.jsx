@@ -58,7 +58,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>a. Name (Last, First Ext, Middle)</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    modal.employee.emp_name || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.emp_name || 'N/A'}</span>
                   ) : (
                     <input
                       type="text"
@@ -72,7 +72,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>k. Year Period</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    modal.employee.emp_yearperiod || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.emp_yearperiod || 'N/A'}</span>
                   ) : (
                     <input
                       type="text"
@@ -88,7 +88,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>b. Current Position</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    modal.employee.emp_position || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.emp_position || 'N/A'}</span>
                   ) : (
                     <select
                       name="emp_position"
@@ -106,7 +106,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>l. Division</strong></td>
                   <td>
                     {modal.type === 'view' ? (
-                      modal.employee.emp_div || 'N/A'
+                      <span style={{fontWeight: 'bold'}}>{modal.employee.emp_div || 'N/A'}</span>
                     ) : (
                       <select
                         name="emp_div"
@@ -126,7 +126,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>c. Salary Grade</strong></td>
                   <td>
                     {modal.type === 'view' ? (
-                      modal.employee.emp_sg || 'N/A'
+                      <span style={{fontWeight: 'bold'}}>{modal.employee.emp_sg || 'N/A'}</span>
                     ) : (
                       <input
                         type="number"
@@ -139,7 +139,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>m. ID Number</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    modal.employee.emp_idnumber || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.emp_idnumber || 'N/A'}</span>
                   ) : (
                     <input
                       type="text"
@@ -154,7 +154,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>d. Years in Current Position</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    modal.employee.emp_yearscurrentpos || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.emp_yearscurrentpos || 'N/A'}</span>
                   ) : (
                     <input
                       type="number"
@@ -167,7 +167,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>n. Start Date</strong></td>
                 <td>
                   {modal.type === 'view'
-                    ? formatDateDisplay(modal.employee.emp_sdatecurrentpos)
+                    ? <span style={{fontWeight: 'bold'}}>{formatDateDisplay(modal.employee.emp_sdatecurrentpos)}</span>
                     : (
                       <DatePicker
                         selected={modal.employee.emp_sdatecurrentpos ? new Date(modal.employee.emp_sdatecurrentpos) : null}
@@ -193,7 +193,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>e. Years in ZCMC occupying a Plantilla Position</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    modal.employee.emp_yearsplantpos || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.emp_yearsplantpos || 'N/A'}</span>
                   ) : (
                     <input
                       type="number"
@@ -206,7 +206,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>o. Start Date for Occupying a Plantilla</strong></td>
                 <td>
                   {modal.type === 'view'
-                    ? formatDateDisplay(modal.employee.emp_sdateplantpos)
+                    ? <span style={{fontWeight: 'bold'}}>{formatDateDisplay(modal.employee.emp_sdateplantpos)}</span>
                     : (
                       <DatePicker
                         selected={modal.employee.emp_sdateplantpos ? new Date(modal.employee.emp_sdateplantpos) : null}
@@ -232,7 +232,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>f. Office/Dept./Unit</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    modal.employee.emp_dep || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.emp_dep || 'N/A'}</span>
                   ) : (
                     <select
                       name="emp_dep"
@@ -250,7 +250,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>p. Immediate Supervisor's Name (Last, First Ext, Middle)</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    modal.employee.emp_supervisor || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.emp_supervisor || 'N/A'}</span>
                   ) : (
                     <Select
                       name="emp_supervisor"
@@ -273,7 +273,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>g. Sex</strong></td>
                 <td style={{ verticalAlign: 'middle' }}>
                   {modal.type === 'view' ? (
-                    modal.employee.emp_sex || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.emp_sex || 'N/A'}</span>
                   ) : (
                     <div className="radio-group">
                       <label className="radio-label">
@@ -302,7 +302,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>q. Email Address</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    modal.employee.emp_email || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.emp_email || 'N/A'}</span>
                   ) : (
                     <input
                       type="email"
@@ -317,7 +317,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>h. Contact Number</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    modal.employee.emp_contact || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.emp_contact || 'N/A'}</span>
                   ) : (
                     <input
                       type="text"
@@ -330,7 +330,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>r. Status</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    modal.employee.emp_status || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.emp_status || 'N/A'}</span>
                   ) : (
                     <select
                       name="emp_status"
@@ -350,7 +350,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>i. Date of Birth</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    formatDateDisplay(modal.employee.emp_dateofbirth)
+                    <span style={{fontWeight: 'bold'}}>{formatDateDisplay(modal.employee.emp_dateofbirth)}</span>
                   ) : (
                     <DatePicker
                       selected={modal.employee.emp_dateofbirth ? new Date(modal.employee.emp_dateofbirth) : null}
@@ -373,7 +373,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>s. Date of Entry</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    formatDateDisplay(modal.employee.emp_dateofentry)
+                    <span style={{fontWeight: 'bold'}}>{formatDateDisplay(modal.employee.emp_dateofentry)}</span>
                   ) : (
                     <DatePicker
                       selected={modal.employee.emp_dateofentry ? new Date(modal.employee.emp_dateofentry) : null}
@@ -398,7 +398,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>j. Classification</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    modal.employee.emp_classification || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.emp_classification || 'N/A'}</span>
                   ) : (
                     <select
                       name="emp_classification"
@@ -416,7 +416,7 @@ const PartI_EmployeeInformation = ({
                 <td><strong>t. With Profession?</strong></td>
                 <td>
                   {modal.type === 'view' ? (
-                    modal.employee.with_prof || 'N/A'
+                    <span style={{fontWeight: 'bold'}}>{modal.employee.with_prof || 'N/A'}</span>
                   ) : (
                     <div className="radio-group">
                       <label className="radio-label">
@@ -444,13 +444,13 @@ const PartI_EmployeeInformation = ({
                 </td>
               </tr>
               {/* WITH PROFESSION FIELDS */}
-              {(modal.employee.with_prof === "Yes" || modal.type === 'view') && (
+              {modal.employee.with_prof === "Yes" && (
                 <>
                   <tr>
                     <td><strong>• Profession</strong></td>
                     <td>
                       {modal.type === 'view' ? (
-                        modal.employee.emp_prof || 'N/A'
+                        <span style={{fontWeight: 'bold'}}>{modal.employee.emp_prof || 'N/A'}</span>
                       ) : (
                         <select
                           name="emp_prof"
@@ -468,7 +468,7 @@ const PartI_EmployeeInformation = ({
                     <td><strong>• CPD Units</strong></td>
                     <td>
                       {modal.type === 'view' ? (
-                        modal.employee.emp_cpdunits || 'N/A'
+                        <span style={{fontWeight: 'bold'}}>{modal.employee.emp_cpdunits || 'N/A'}</span>
                       ) : (
                         <input
                           type="number"
@@ -484,7 +484,7 @@ const PartI_EmployeeInformation = ({
                     <td><strong>• PRC ID No.</strong></td>
                     <td>
                       {modal.type === 'view' ? (
-                        modal.employee.emp_prcid || 'N/A'
+                        <span style={{fontWeight: 'bold'}}>{modal.employee.emp_prcid || 'N/A'}</span>
                       ) : (
                         <input
                           type="text"
@@ -497,7 +497,7 @@ const PartI_EmployeeInformation = ({
                     <td><strong>• PRC Expiration Date</strong></td>
                     <td>
                       {modal.type === 'view' ? (
-                        formatDateDisplay(modal.employee.emp_prcexpdate)
+                        <span style={{fontWeight: 'bold'}}>{formatDateDisplay(modal.employee.emp_prcexpdate)}</span>
                       ) : (
                         <DatePicker
                           selected={modal.employee.emp_prcexpdate ? new Date(modal.employee.emp_prcexpdate) : null}
@@ -550,6 +550,7 @@ const PartI_EmployeeInformation = ({
           addPart3Set={addPart3Set}
           removePart3Set={removePart3Set}
           updatePart3Field={updatePart3Field}
+          readOnly={modal.type === 'view'}
         />
 
         <div className="modal-actions">

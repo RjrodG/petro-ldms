@@ -31,7 +31,7 @@ const PartII_CompetencyAssessment = ({
           <label style={{marginTop: '5px'}}>
             a. Description/Critical Incident/Comment
             {modal && modal.type === 'view' ? (
-              <div style={{ padding: '8px 0' }}>{description || 'N/A'}</div>
+              <div style={{ padding: '8px 0', fontWeight: 'bold' }}>{description || 'N/A'}</div>
             ) : (
               <textarea
                 className="idp-desc"
@@ -53,7 +53,7 @@ const PartII_CompetencyAssessment = ({
               {strengths.map((value, idx) => (
                 <div className="idp-list" key={idx} style={{display: 'flex', alignItems: 'center', marginBottom: 4}}>
                   {modal && modal.type === 'view' ? (
-                    <div style={{flex: 1, padding: '8px 0', fontSize: '0.9rem', borderBottom: '1px solid #ccc', marginLeft: '12px'}}>
+                    <div style={{flex: 1, padding: '8px 0', fontSize: '0.9rem', borderBottom: '1px solid #ccc', marginLeft: '12px', fontWeight: 'bold'}}>
                       {value || 'N/A'}
                     </div>
                   ) : (
@@ -86,7 +86,7 @@ const PartII_CompetencyAssessment = ({
               {gaps.map((value, idx) => (
                 <div className="idp-list" key={idx} style={{display: 'flex', alignItems: 'center', marginBottom: 4}}>
                   {modal && modal.type === 'view' ? (
-                    <div style={{flex: 1, padding: '8px 0', fontSize: '0.9rem', borderBottom: '1px solid #ccc', marginLeft: '12px'}}>
+                    <div style={{flex: 1, padding: '8px 0', fontSize: '0.9rem', borderBottom: '1px solid #ccc', marginLeft: '12px', fontWeight: 'bold'}}>
                       {value || 'N/A'}
                     </div>
                   ) : (
