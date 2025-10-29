@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import './DashboardHome.css';
+=======
+import React from 'react';
+import './DashboardHome.css';
+import logo1 from "../../assets/img/login-logo-zcmc.png";
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
 import logo2 from "../../assets/img/login-logo-petro.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faChartBar, faUserGraduate, faPercentage, faFileLines } from '@fortawesome/free-solid-svg-icons';
@@ -33,7 +39,10 @@ const DashboardHome = () => {
     const conductedTrainings = 30;
     const staffWithLDI = 120;
     const cumulativePercentage = (staffWithLDI / totalEmployees) * 100;
+<<<<<<< HEAD
     const [now, setNow] = useState(new Date());
+=======
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
 
     // Staff with LDI per month (Line chart)
     const ldiPerMonth = {
@@ -160,6 +169,7 @@ const DashboardHome = () => {
         alert('Opening ZCMC Training Personnel Order 2025...');
     };
 
+<<<<<<< HEAD
     useEffect(() => {
       const timer = setInterval(() => setNow(new Date()), 1000);
       return () => clearInterval(timer);
@@ -186,6 +196,21 @@ const DashboardHome = () => {
                   </div>
                   <div className="dt-time">{timeStr}</div>
                </div>
+=======
+    return (
+        <div className="dashboard-welcome">
+            <div className="dashboard-header">
+                <div className="dashboard-logos">
+                    <img src={logo1} alt="Logo 1" className="dashboard-logo" />
+                    <img src={logo2} alt="Logo 2" className="dashboard-logo" />
+                </div>
+                <div className="dashboard-title">
+                    <h3>Zamboanga City Medical Center PETRO</h3>
+                    <span className="dashboard-subtitle">
+                        Learning and Development Management System
+                    </span>
+                </div>
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
             </div>
             
             <div className="dashboard-cards-grid">

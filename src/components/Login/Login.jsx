@@ -24,12 +24,16 @@ function Login() {
 
   return (
     <div className="container">
+<<<<<<< HEAD
       
       <div className="left">
         <img src={loginImage} alt="Login-Image" />
       </div>
       
       <div className="right">
+=======
+      <div className="left">
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
         <div className="logo-container">
           <img src={logo1} alt="Logo 1" className="logo" />
           <img src={logo2} alt="Logo 2" className="logo" />
@@ -60,9 +64,19 @@ function Login() {
           <button type="submit">Sign In</button>
         </form>
         <div className="footer">
+<<<<<<< HEAD
           © ZCMC Professional Education Training and Research Office 2025
         </div>
       </div>
+=======
+          © ZCMC Professional Education Training and Research Office 2024
+        </div>
+      </div>
+
+      <div className="right">
+        <img src={loginImage} alt="Login-Image" />
+      </div>
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
     </div>
   );
 }

@@ -7,8 +7,13 @@
 
 /* Sidebar container with fixed width */
 .sidebar-container {
+<<<<<<< HEAD
   width: 200px; /* fixed width */
   min-width: 200px;
+=======
+  width: 260px; /* fixed width */
+  min-width: 260px;
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   height: 100vh;
   background-color: #fff;
   box-sizing: border-box;

@@ -12,7 +12,11 @@ const db = mysql.createPool({
   user: 'root',
   password: '',
   database: 'petroldms'
+<<<<<<< HEAD
 }); 
+=======
+});
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
 
 // Get all employees
 app.get('/api/employees', async (req, res) => {
@@ -105,6 +109,7 @@ app.get('/api/competencies', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 function normalizeEmptyToNull(v) {
   if (v === undefined || v === null) return null;
   if (typeof v === 'string' && v.trim() === '') return null;
@@ -162,6 +167,48 @@ app.post('/api/employees', async (req, res) => {
     console.error('POST /api/employees error:', err);
     // include err.message in response while debugging (remove in production)
     res.status(500).json({ error: 'Failed to add employee', details: err.message });
+=======
+// Add employee
+app.post('/api/employees', async (req, res) => {
+  try {
+    const emp = req.body;
+    const [result] = await db.query(
+      `INSERT INTO employee
+      (emp_name, emp_position, emp_sg, emp_yearscurrentpos, emp_yearsplantpos, emp_dep, emp_sex, emp_contact, emp_classification, emp_yearperiod, emp_div, emp_idnumber, emp_sdatecurrentpos, emp_sdateplantpos, emp_super, emp_email, emp_status, emp_dateofbirth, emp_dateofentry, with_prof, emp_prof, emp_cpdunits, emp_prcid, emp_prcexpdate)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `,
+      [
+        emp.emp_name,
+        emp.emp_position,
+        emp.emp_sg,
+        emp.emp_yearscurrentpos,
+        emp.emp_yearsplantpos,
+        emp.emp_dep,
+        emp.emp_sex,
+        emp.emp_contact,
+        emp.emp_classification,
+        emp.emp_yearperiod,
+        emp.emp_div,
+        emp.emp_idnumber,
+        emp.emp_sdatecurrentpos,
+        emp.emp_sdateplantpos,
+        emp.emp_super,
+        emp.emp_email,
+        emp.emp_status,
+        emp.emp_dateofbirth,
+        emp.emp_dateofentry,
+        emp.with_prof,
+        emp.emp_prof,
+        emp.emp_cpdunits,
+        emp.emp_prcid,
+        emp.emp_prcexpdate
+      ]
+    );
+    res.json({ success: true, emp_id: result.insertId });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to add employee' });
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   }
 });
 // Update employee
@@ -171,6 +218,7 @@ app.put('/api/employees/:id', async (req, res) => {
     const { id } = req.params;
     await db.query(
       `UPDATE employee SET
+<<<<<<< HEAD
         dep_id=?,
         pos_id=?,
         prof_id=?,
@@ -182,6 +230,17 @@ app.put('/api/employees/:id', async (req, res) => {
         emp_yearsplantpos=?,
         emp_sex=?,
         emp_contact=?,
+=======
+        emp_name=?,
+        emp_position=?,
+        emp_sg=?,
+        emp_yearscurrentpos=?,
+        emp_yearsplantpos=?,
+        emp_dep=?,
+        emp_sex=?,
+        emp_contact=?,
+        emp_classification=?,
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
         emp_yearperiod=?,
         emp_div=?,
         emp_idnumber=?,
@@ -189,14 +248,23 @@ app.put('/api/employees/:id', async (req, res) => {
         emp_sdateplantpos=?,
         emp_super=?,
         emp_email=?,
+<<<<<<< HEAD
         emp_dateofbirth=?,
         emp_dateofentry=?,
         with_prof=?,
+=======
+        emp_status=?,
+        emp_dateofbirth=?,
+        emp_dateofentry=?,
+        with_prof=?,
+        emp_prof=?,
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
         emp_cpdunits=?,
         emp_prcid=?,
         emp_prcexpdate=?
       WHERE emp_id=?`,
       [
+<<<<<<< HEAD
         emp.dep_id ?? null,
         emp.pos_id ?? null,
         emp.prof_id ?? null,
@@ -221,6 +289,32 @@ app.put('/api/employees/:id', async (req, res) => {
         emp.emp_cpdunits ?? null,
         emp.emp_prcid ?? null,
         emp.emp_prcexpdate ?? null,
+=======
+        emp.emp_name,
+        emp.emp_position,
+        emp.emp_sg,
+        emp.emp_yearscurrentpos,
+        emp.emp_yearsplantpos,
+        emp.emp_dep,
+        emp.emp_sex,
+        emp.emp_contact,
+        emp.emp_classification,
+        emp.emp_yearperiod,
+        emp.emp_div,
+        emp.emp_idnumber,
+        emp.emp_sdatecurrentpos,
+        emp.emp_sdateplantpos,
+        emp.emp_super,
+        emp.emp_email,
+        emp.emp_status,
+        emp.emp_dateofbirth,
+        emp.emp_dateofentry,
+        emp.with_prof,
+        emp.emp_prof,
+        emp.emp_cpdunits,
+        emp.emp_prcid,
+        emp.emp_prcexpdate,
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
         id
       ]
     );

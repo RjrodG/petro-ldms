@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .sidebar-logo {
   height: 60px;
   width: auto;
@@ -6,11 +7,19 @@
 
 .sidebar {
   width: 200px;
+=======
+.sidebar {
+  width: 260px;
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   position: fixed; /* fixed to left */
   height: 100vh;
   top: 0;
   left: 0;
+<<<<<<< HEAD
   background: #043915;
+=======
+  background: #fff;
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   border-right: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
@@ -20,11 +29,18 @@
 
 .sidebar-user {
   display: flex;
+<<<<<<< HEAD
   flex-direction: row;
   align-items: center;
   justify-content: center;
   margin-bottom: 12px;
   color: #00bf63; 
+=======
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+  color: #00bf63;
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
 }
 
 .sidebar-username {
@@ -50,17 +66,27 @@
   display: flex;
   align-items: center;
   padding: 14px 32px;
+<<<<<<< HEAD
   color: #FFF;
   text-decoration: none;
   font-size: 0.8rem;
+=======
+  color: #222;
+  text-decoration: none;
+  font-size: 1rem;
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   cursor: pointer;
   transition: background 0.2s;
 }
 
 .sidebar-menu a:hover,
 .sidebar-intervention:hover {
+<<<<<<< HEAD
   background: #FFF;
   COLOR:#043915;
+=======
+  background: #f3f4f6;
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
 }
 
 .sidebar-icon {
@@ -75,13 +101,22 @@
 .sidebar-submenu {
   list-style: none;
   padding: 0 0 0 32px;
+<<<<<<< HEAD
   background: #043915;
+=======
+  background: #f9fafb;
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
 }
 
 .sidebar-submenu li a {
   padding: 10px 16px;
+<<<<<<< HEAD
   font-size: 0.8rem;
   color: #fff;
+=======
+  font-size: 0.95rem;
+  color: #333;
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   display: flex;
   align-items: center;
 }
@@ -92,7 +127,11 @@
 
 /* Sign Out Button */
 .signout-button-sidebar { 
+<<<<<<< HEAD
   background-color: #043915; /* Bootstrap danger red */
+=======
+  background-color: #fff; /* Bootstrap danger red */
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   color: white;
   border: none;
   padding: 12px 12px;
@@ -112,7 +151,12 @@
 
 .signout-button-sidebar .sidebar-icon {
   justify-content: center;
+<<<<<<< HEAD
   font-size: 1rem;
   color:#ff2e43;
+=======
+  font-size: 1.2rem;
+  color:#c82333;
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
 }
   

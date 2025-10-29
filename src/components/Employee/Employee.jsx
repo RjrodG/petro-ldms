@@ -1,15 +1,23 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
 import EmployeeInformation from './Employee_Information';
 import { FaCheckCircle, FaUserPlus, FaEye, FaEdit, FaTrash } from 'react-icons/fa';
 import { RiUploadCloudFill, RiDownloadCloudFill } from 'react-icons/ri';
 import EmployeeImport from './Employee_Import';
 import EmployeeExport from './Employee_Export';
+=======
+import EmployeeInformation from './PartI_EmployeeInformation';
+import { FaCheckCircle, FaUserPlus, FaEye, FaEdit, FaTrash } from 'react-icons/fa';
+import { RiUploadCloudFill, RiDownloadCloudFill } from 'react-icons/ri';
+import UploadModal from './UploadModal';
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
 
 
 // Update your emptyEmployee to include all fields from your new query
 const emptyEmployee = {
   emp_id: null,
+<<<<<<< HEAD
   dep_id: '',
   prof_id: '',
   pos_id: '',
@@ -21,6 +29,17 @@ const emptyEmployee = {
   emp_yearsplantpos: '',
   emp_sex: '',
   emp_contact: '',
+=======
+  emp_name: '',
+  emp_position: '',
+  emp_sg: '',
+  emp_yearscurrentpos: '',
+  emp_yearsplantpos: '',
+  emp_dep: '',
+  emp_sex: '',
+  emp_contact: '',
+  emp_classification: '',
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   emp_yearperiod: '',
   emp_div: '',
   emp_idnumber: '',
@@ -28,9 +47,17 @@ const emptyEmployee = {
   emp_sdateplantpos: '',
   emp_super: '',
   emp_email: '',
+<<<<<<< HEAD
   emp_dateofentry: '',
   emp_dateofbirth: '',
   with_prof: '',
+=======
+  emp_status: '',
+  emp_dateofentry: '',
+  emp_dateofbirth: '',
+  with_prof: '',
+  emp_prof: '',
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   emp_prcid: '',
   emp_prcexpdate: '',
   emp_cpdunits: ''
@@ -42,8 +69,12 @@ const Employee = (props) => {
   const [modal, setModal] = useState({ type: null, open: false, employee: emptyEmployee });
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIds, setSelectedIds] = useState([]);
+<<<<<<< HEAD
   const [showImportModal, setShowImportModal] = useState(false);
   const [showExportModal, setShowExportModal] = useState(false);
+=======
+  const [showUploadModal, setShowUploadModal] = useState(false);
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   const [showAddSuccess, setShowAddSuccess] = useState(false);
   const [showUpdateSuccess, setUShowUpdateSuccess] = useState(false);
   const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
@@ -60,7 +91,10 @@ const Employee = (props) => {
   // For modal subcomponents
   const [showCompetencyAssessment, setShowCompetencyAssessment] = useState(true);
   const [showLearningandDevelopment, setShowLearningandDevelopment] = useState(true);
+<<<<<<< HEAD
   const [showInHouseTraining, setShowInHouseTraining] = useState(true);
+=======
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   const [strengths, setStrengths] = useState(['']);
   const [gaps, setGaps] = useState(['']);
   const [part3Sets, setPart3Sets] = useState([
@@ -286,8 +320,13 @@ const Employee = (props) => {
     const { name, value } = e.target;
     let updatedEmployee = { ...modal.employee, [name]: value };
 
+<<<<<<< HEAD
     if (name === 'pos_id') {
       const selected = positionOptions.find(pos => pos.pos_id === Number(value));
+=======
+    if (name === 'emp_position') {
+      const selected = positionOptions.find(pos => pos.pos_name === value);
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
       console.log('Selected:', selected);
       if (selected) {
         console.log('Selected salary grade:', selected.pos_sg); // <-- This line
@@ -295,8 +334,13 @@ const Employee = (props) => {
       }
     }
       // If department is changed, auto-fill division
+<<<<<<< HEAD
     if (name === 'dep_id') {
       const selectedDep = departmentOptions.find(dep => dep.dep_id === Number(value));
+=======
+    if (name === 'emp_dep') {
+      const selectedDep = departmentOptions.find(dep => dep.dep_name === value);
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
       if (selectedDep) {
         updatedEmployee.emp_div = selectedDep.dep_division; // <-- fix here
       } else {
@@ -318,6 +362,7 @@ const Employee = (props) => {
     // Prepare data for backend (match backend field names and order)
     const employeeData = {
       emp_id: modal.employee.emp_id, // usually null or omitted for insert
+<<<<<<< HEAD
       dep_id: modal.employee.dep_id,
       pos_id: modal.employee.pos_id,
       prof_id: modal.employee.prof_id,
@@ -329,6 +374,17 @@ const Employee = (props) => {
       emp_yearsplantpos: modal.employee.emp_yearsplantpos,
       emp_sex: modal.employee.emp_sex,
       emp_contact: modal.employee.emp_contact,
+=======
+      emp_name: modal.employee.emp_name,
+      emp_position: modal.employee.emp_position,
+      emp_sg: modal.employee.emp_sg,
+      emp_yearscurrentpos: modal.employee.emp_yearscurrentpos,
+      emp_yearsplantpos: modal.employee.emp_yearsplantpos,
+      emp_dep: modal.employee.emp_dep,
+      emp_sex: modal.employee.emp_sex,
+      emp_contact: modal.employee.emp_contact,
+      emp_classification: modal.employee.emp_classification,
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
       emp_yearperiod: modal.employee.emp_yearperiod,
       emp_div: modal.employee.emp_div, // make sure this matches your backend field
       emp_idnumber: modal.employee.emp_idnumber,
@@ -336,9 +392,17 @@ const Employee = (props) => {
       emp_sdateplantpos: modal.employee.emp_sdateplantpos || null,
       emp_super: modal.employee.emp_super, // supervisor field
       emp_email: modal.employee.emp_email,
+<<<<<<< HEAD
       emp_dateofbirth: modal.employee.emp_dateofbirth || null,
       emp_dateofentry: modal.employee.emp_dateofentry || null,
       with_prof: modal.employee.with_prof,
+=======
+      emp_status: modal.employee.emp_status,
+      emp_dateofbirth: modal.employee.emp_dateofbirth || null,
+      emp_dateofentry: modal.employee.emp_dateofentry || null,
+      with_prof: modal.employee.with_prof,
+      emp_prof: modal.employee.emp_prof,
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
       emp_cpdunits: modal.employee.emp_cpdunits,
       emp_prcid: modal.employee.emp_prcid,
       emp_prcexpdate: modal.employee.emp_prcexpdate || null,
@@ -546,7 +610,11 @@ for (let i = startPage; i <= endPage; i++) {
 
       {/* Header Row */}
       <div className="employee-header-row">
+<<<<<<< HEAD
         <h4>Employee List</h4>
+=======
+        <h2>Employee List</h2>
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
       </div>
       
       {/* Controls Row */}
@@ -573,6 +641,7 @@ for (let i = startPage; i <= endPage; i++) {
             </button>
           )}
         </div>
+<<<<<<< HEAD
 
         <div className="fab-container">
           <button
@@ -600,6 +669,17 @@ for (let i = startPage; i <= endPage; i++) {
           </button>
         </div>
 
+=======
+        <button className="add-employee-modal-btn" onClick={() => { openModal('add'); }}>
+          Add Employee <FaUserPlus size={18} />
+        </button>
+        <button className="import-employee-modal-btn" onClick={() => setShowUploadModal(true)}>
+          Import <RiDownloadCloudFill size={18} />
+        </button>
+        <button className="export-employee-modal-btn" onClick={() => setShowUploadModal(true)}>
+          Export <RiUploadCloudFill size={18} />
+        </button>
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
       </div>
 
       {/* Employee Table */}
@@ -621,6 +701,7 @@ for (let i = startPage; i <= endPage; i++) {
           </tr>
         </thead>
         <tbody>
+<<<<<<< HEAD
             {paginatedEmployees.map(emp => {
               const positionName =
                 positionOptions.find(pos => pos.pos_id === emp.pos_id)?.pos_name || 'N/A';
@@ -667,6 +748,47 @@ for (let i = startPage; i <= endPage; i++) {
               );
             })}
           </tbody>
+=======
+          {paginatedEmployees.map(emp => (
+            <tr key={emp.emp_id}>
+              <td>
+                <input
+                  type="checkbox"
+                  checked={selectedIds.includes(emp.emp_id)}
+                  onChange={() => handleCheckbox(emp.emp_id)}
+                  aria-label={`Select ${emp.emp_name}`}
+                />
+              </td>
+              <td>{emp.emp_name}</td>
+              <td>{emp.emp_position}</td>
+              <td>{emp.emp_dep}</td>
+              <td style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>
+                <button
+                  className="action-btn view"
+                  title="View"
+                  onClick={() => openModal('view', emp)}
+                >
+                  <FaEye />
+                </button>
+                <button
+                  className="action-btn update"
+                  title="Edit"
+                  onClick={() => openModal('update', emp)}
+                >
+                  <FaEdit />
+                </button>
+                <button
+                  className="action-btn delete"
+                  title="Delete"
+                  onClick={() => handleDelete(emp.emp_id)}
+                >
+                  <FaTrash />
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
       </table>
 
       {/* Pagination Controls */}
@@ -722,8 +844,11 @@ for (let i = startPage; i <= endPage; i++) {
           setShowCompetencyAssessment={setShowCompetencyAssessment}
           showLearningandDevelopment={showLearningandDevelopment}
           setShowLearningandDevelopment={setShowLearningandDevelopment}
+<<<<<<< HEAD
           showInHouseTraining={showInHouseTraining}
           setShowInHouseTraining={setShowInHouseTraining}
+=======
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
           part3Sets={part3Sets}
           addPart3Set={() => setPart3Sets([...part3Sets, {
             developmentActivity: '',
@@ -744,6 +869,7 @@ for (let i = startPage; i <= endPage; i++) {
         />
       )}
 
+<<<<<<< HEAD
       {/* Add the Import Modal */}
       <EmployeeImport 
         show={showImportModal}
@@ -755,6 +881,15 @@ for (let i = startPage; i <= endPage; i++) {
         show={showExportModal}
         onClose={() => setShowExportModal(false)}
       />
+=======
+      {/* Upload Modal */}
+      {showUploadModal && (
+        <UploadModal
+          show={showUploadModal}
+          onClose={() => setShowUploadModal(false)}
+        />
+      )}
+>>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
     </div>
   );
 };
