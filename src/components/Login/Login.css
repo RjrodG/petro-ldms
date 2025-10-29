@@ -11,20 +11,12 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-<<<<<<< HEAD
     background-color: #043915;
-=======
-    background-color: #f3f4f6;
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   }
   
   .container {
     display: flex;
-<<<<<<< HEAD
     width: 1000px;
-=======
-    width: 1200px;
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
     height: 70vh;
     background: #fff;
     border-radius: 10px;
@@ -32,13 +24,8 @@
     overflow: hidden;
   }
   
-<<<<<<< HEAD
   /* right Section */
   .right {
-=======
-  /* Left Section */
-  .left {
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -49,17 +36,12 @@
     padding: 2rem;
   }
   
-<<<<<<< HEAD
   .right .logo-container {
-=======
-  .left .logo-container {
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
     justify-content: center; /* Center logos horizontally */
     align-items: center; /* Align logos vertically */
     margin-bottom: 1rem; /* Add some space below the logo container */
   }
   
-<<<<<<< HEAD
   .right img {
     width: 50px;
     height: auto;
@@ -67,24 +49,11 @@
   }
   
   .right h1 {
-=======
-  .left img {
-    width: 50px;
-    height: auto;
-    margin: 0 0.5rem; /* Add margin to separate the logos */
-  }
-  
-  .left h1 {
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
   }
   
-<<<<<<< HEAD
   .right p {
-=======
-  .left p {
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
     font-size: 0.9rem;
     margin-bottom: 2rem;
     text-align: center;
@@ -99,13 +68,8 @@
     width: 100%;
     padding: 0.8rem;
     margin: 0.5rem 0;
-<<<<<<< HEAD
     border: 1px solid #ececec;
     border-radius: 5px;
-=======
-    border: none;
-    border-radius: 1px;
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
     font-size: 1rem;
   }
   
@@ -130,13 +94,8 @@
     background: #00994d;
   }
   
-<<<<<<< HEAD
   /* left Section */
   .left {
-=======
-  /* Right Section */
-  .right {
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
     flex: 1;
     display: flex;
     align-items: center;
@@ -144,11 +103,7 @@
     background: #ffff;
   }
   
-<<<<<<< HEAD
   .left img {
-=======
-  .right img {
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
     width: 80%;
     height: auto;
   }
@@ -157,11 +112,7 @@
   .footer {
     margin-top: 2rem;
     font-size: 0.56rem;
-<<<<<<< HEAD
     color: #a09c9c;
-=======
-    color: #000;
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
     text-align: center;
   }
   
