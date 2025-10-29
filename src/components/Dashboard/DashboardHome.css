@@ -14,42 +14,20 @@
   display: flex;
   align-items: center;
   margin-bottom: 24px;
-<<<<<<< HEAD
   gap: 1rem;
-=======
-}
-
-.dashboard-logos {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-
-.dashboard-logo {
-  height: 48px;
-  width: auto;
-  margin-right: 3px;
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
 }
 
 .dashboard-title {
   margin-left: 14px;
 }
 
-<<<<<<< HEAD
 .dashboard-title p, .dashboard-title span {
   margin: 0;
   font-size: 1rem;
-=======
-.dashboard-title h1 {
-  margin: 0;
-  font-size: 1.6rem;
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   font-weight: 500;
   color: #222;
 }
 
-<<<<<<< HEAD
 .dashboard-datetime {
   margin-left: auto;
   display: flex;
@@ -76,16 +54,10 @@
   font-size: 1.25rem;
 }
 
-=======
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
 .dashboard-subtitle {
   display: block;
   font-size: 17px;
   color: #444;
-<<<<<<< HEAD
-=======
-  margin-top: 2px;
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   font-family: 'Segoe UI', Arial, sans-serif;
 }
 
@@ -112,11 +84,7 @@
   border: none;
   padding: 8px 30px;
   font-size: 1rem;
-<<<<<<< HEAD
   border-radius: 3px;
-=======
-  border-radius: 5px;
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-right: 8px;
@@ -151,11 +119,7 @@
 /* General card styling */
 .card {
   background-color: #fff;
-<<<<<<< HEAD
   border-radius: 5px;
-=======
-  border-radius: 8px;
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
   padding: 24px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   display: flex;

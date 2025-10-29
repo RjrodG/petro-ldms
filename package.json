@@ -12,11 +12,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
-<<<<<<< HEAD
     "@fortawesome/react-fontawesome": "^0.2.6",
-=======
-    "@fortawesome/react-fontawesome": "^0.2.2",
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
     "axios": "^1.9.0",
     "chart.js": "^4.4.9",
     "cor": "^0.0.0",

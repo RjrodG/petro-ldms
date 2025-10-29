@@ -321,6 +321,7 @@ const Employee_Information = ({
                         name="emp_email"
                         value={modal.employee.emp_email}
                         onChange={handleChange}
+                        required
                       />
                     )}
                   </td>

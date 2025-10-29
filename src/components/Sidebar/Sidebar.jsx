@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { RiLogoutCircleLine } from "react-icons/ri";
-<<<<<<< HEAD
 import logo1 from "../../assets/img/login-logo-zcmc.png";
 import logo2 from "../../assets/img/login-logo-petro.png";
-=======
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
 import {
   FaUserCircle,
   FaTachometerAlt,
@@ -39,15 +36,10 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-user">
-<<<<<<< HEAD
         <div className="sidebar-logos">
         <img src={logo1} alt="Logo 1" className="sidebar-logo" />
         <img src={logo2} alt="Logo 2" className="sidebar-logo" />
         </div>
-=======
-        <FaUserCircle size={64} />
-        <h3 className="sidebar-username">User Name</h3>
->>>>>>> 09bc5329e0f5128e02a03b85d002434a96b1a265
       </div>
       <ul className="sidebar-menu">
         <li>
