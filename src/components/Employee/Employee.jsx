@@ -6,7 +6,6 @@ import { RiUploadCloudFill, RiDownloadCloudFill } from 'react-icons/ri';
 import EmployeeImport from './Employee_Import';
 import EmployeeExport from './Employee_Export';
 
-
 // Update your emptyEmployee to include all fields from your new query
 const emptyEmployee = {
   emp_id: null,
@@ -61,6 +60,7 @@ const Employee = (props) => {
   const [showCompetencyAssessment, setShowCompetencyAssessment] = useState(true);
   const [showLearningandDevelopment, setShowLearningandDevelopment] = useState(true);
   const [showInHouseTraining, setShowInHouseTraining] = useState(true);
+  const [showOutHouseTraining, setShowOutHouseTraining] = useState(true);
   const [strengths, setStrengths] = useState(['']);
   const [gaps, setGaps] = useState(['']);
   const [part3Sets, setPart3Sets] = useState([
@@ -76,7 +76,7 @@ const Employee = (props) => {
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 14;
+  const rowsPerPage = 30;
 
   // Fetch employees from backend on mount
   // Employee.jsx
@@ -543,11 +543,6 @@ for (let i = startPage; i <= endPage; i++) {
           <button className="close-btn" onClick={() => setShowDeleteSuccess(false)}>×</button>
         </div>
       )}
-
-      {/* Header Row */}
-      <div className="employee-header-row">
-        <h4>Employee List</h4>
-      </div>
       
       {/* Controls Row */}
       <div className="employee-controls-row">
@@ -600,74 +595,81 @@ for (let i = startPage; i <= endPage; i++) {
           </button>
         </div>
 
+        <div className="employee-header-row">
+          <span>LDMS | Employee List</span>
+        </div>
       </div>
 
       {/* Employee Table */}
-      <table className="employee-table">
-        <thead>
-          <tr>
-            <th>
-              <input
-                type="checkbox"
-                checked={allSelected}
-                onChange={handleSelectAll}
-                aria-label="Select all"
-              />
-            </th>
-            <th style={{ width: 350}}>Name</th>
-            <th style={{ width: 250}}>Position</th>
-            <th style={{ width: 250}}>Department</th>
-            <th style={{ width: 250, textAlign: 'center' }}>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-            {paginatedEmployees.map(emp => {
-              const positionName =
-                positionOptions.find(pos => pos.pos_id === emp.pos_id)?.pos_name || 'N/A';
-              const departmentName =
-                departmentOptions.find(dep => dep.dep_id === emp.dep_id)?.dep_name || 'N/A';
+      <div className="employee-card-body">
+        <div className="employee-table-responsive">
+          <table className="employee-table">
+            <thead>
+              <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    checked={allSelected}
+                    onChange={handleSelectAll}
+                    aria-label="Select all"
+                  />
+                </th>
+                <th style={{ width: 350 }}>Name</th>
+                <th style={{ width: 250 }}>Position</th>
+                <th style={{ width: 250 }}>Department</th>
+                <th style={{ width: 250, textAlign: 'center' }}>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {paginatedEmployees.map(emp => {
+                const positionName =
+                  positionOptions.find(pos => pos.pos_id === emp.pos_id)?.pos_name || 'N/A';
+                const departmentName =
+                  departmentOptions.find(dep => dep.dep_id === emp.dep_id)?.dep_name || 'N/A';
 
-              return (
-                <tr key={emp.emp_id}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      checked={selectedIds.includes(emp.emp_id)}
-                      onChange={() => handleCheckbox(emp.emp_id)}
-                      aria-label={`Select ${emp.emp_name}`}
-                    />
-                  </td>
-                  <td>{emp.emp_name}</td>
-                  <td>{positionName}</td>
-                  <td>{departmentName}</td>
-                  <td style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>
-                    <button
-                      className="action-btn view"
-                      title="View"
-                      onClick={() => openModal('view', emp)}
-                    >
-                      <FaEye />
-                    </button>
-                    <button
-                      className="action-btn update"
-                      title="Edit"
-                      onClick={() => openModal('update', emp)}
-                    >
-                      <FaEdit />
-                    </button>
-                    <button
-                      className="action-btn delete"
-                      title="Delete"
-                      onClick={() => handleDelete(emp.emp_id)}
-                    >
-                      <FaTrash />
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-      </table>
+                return (
+                  <tr key={emp.emp_id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedIds.includes(emp.emp_id)}
+                        onChange={() => handleCheckbox(emp.emp_id)}
+                        aria-label={`Select ${emp.emp_name}`}
+                      />
+                    </td>
+                    <td>{emp.emp_name}</td>
+                    <td>{positionName}</td>
+                    <td>{departmentName}</td>
+                    <td style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>
+                      <button
+                        className="action-btn view"
+                        title="View"
+                        onClick={() => openModal('view', emp)}
+                      >
+                        <FaEye />
+                      </button>
+                      <button
+                        className="action-btn update"
+                        title="Edit"
+                        onClick={() => openModal('update', emp)}
+                      >
+                        <FaEdit />
+                      </button>
+                      <button
+                        className="action-btn delete"
+                        title="Delete"
+                        onClick={() => handleDelete(emp.emp_id)}
+                      >
+                        <FaTrash />
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       {/* Pagination Controls */}
       <div className="pagination">
@@ -724,6 +726,8 @@ for (let i = startPage; i <= endPage; i++) {
           setShowLearningandDevelopment={setShowLearningandDevelopment}
           showInHouseTraining={showInHouseTraining}
           setShowInHouseTraining={setShowInHouseTraining}
+          showOutHouseTraining={showOutHouseTraining}
+          setShowOutHouseTraining={setShowOutHouseTraining}
           part3Sets={part3Sets}
           addPart3Set={() => setPart3Sets([...part3Sets, {
             developmentActivity: '',

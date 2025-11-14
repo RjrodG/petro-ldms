@@ -1,10 +1,22 @@
 import express from 'express';
 import cors from 'cors';
 import mysql from 'mysql2/promise';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
+const distPath = path.join(__dirname, '../dist');
+console.log('Serving static files from:', distPath);
+
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(distPath));
+app.get(/^(?!\/api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+});
 
 // Update these credentials for your MySQL setup
 const db = mysql.createPool({
@@ -379,6 +391,55 @@ app.post('/api/employees/:id/ldplan', async (req, res) => {
   }
 });
 
+//Add In-House Training
+
+function sanitizeEmployeeInhouseForInsert(empIH) {
+  return [
+    empIH.emp_id || null,
+    empIH.training_ih_id || null,
+    empIH.comp_id || null,
+    empIH.emp_ih_title || '',
+    empIH.emp_ih_startdate || null,
+    empIH.emp_ih_enddate || null,
+    empIH.emp_ih_venue || '',
+    empIH.emp_ih_classification || '',
+    empIH.emp_ih_category || '',
+    empIH.emp_ih_objectives || '',
+    empIH.emp_ih_certificate || '',
+    empIH.emp_ih_personnelorder || ''
+  ];
+}
+
+app.post('/api/employee_training_inhouse', async (req, res) => {
+  try {
+    console.log('POST /api/employee_training_inhouse body:', req.body); // log incoming payload
+
+    const empIH = req.body;
+    const values = sanitizeEmployeeInhouseForInsert(empIH);
+
+    const sql = `
+      INSERT INTO employee_training_inhouse
+        (emp_id, training_ih_id, comp_id,
+         emp_ih_title, emp_ih_startdate, emp_ih_enddate, emp_ih_venue,
+         emp_ih_classification, emp_ih_category, emp_ih_objectives,
+         emp_ih_certificate, emp_ih_personnelorder)
+      VALUES (${new Array(values.length).fill('?').join(',')})
+    `;
+
+    const [result] = await db.execute(sql, values);
+    res.json({ success: true, emp_ih_id: result.insertId });
+
+  } catch (err) {
+    console.error('POST /api/employee_training_inhouse error:', err);
+    res.status(500).json({
+      error: 'Failed to add employee training inhouse record',
+      details: err.message
+    });
+  }
+});
+
 // Start server
 const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Server running on http://0.0.0.0:${PORT}`);
+});

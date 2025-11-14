@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileUpload, faClipboardList, faCalendarAlt, faBuilding, faTag, faUserCheck } from '@fortawesome/free-solid-svg-icons';
-import { FaChevronRight, FaEye, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaChevronRight, FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import './EmployeeStyle.css';
 
-const EmployeeInHouseTraining = ({ show, setShow, employeeId }) => {
+const EmployeeOutHouseTraining = ({ show, setShow, employeeId }) => {
   const [trainings, setTrainings] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -32,16 +32,15 @@ const EmployeeInHouseTraining = ({ show, setShow, employeeId }) => {
 
   useEffect(() => {
     if (!show) return;
-    // TODO: fetch trainings from server for employeeId
+    // TODO: fetch out-house trainings for employeeId from server
     setTrainings([
-      { id: 1, trainingTitle: 'Fire Safety', startDate: '2024-05-12', endDate: '2024-05-12', venue: 'Hall A', type: 'Type 1', category: 'Category 1', certificateFileName: null, certificateUrl: null, personnelFileName: null, personnelUrl: null },
-      { id: 2, trainingTitle: 'Data Privacy', startDate: '2024-06-20', endDate: '2024-06-20', venue: 'Room 2', type: 'Type 2', category: 'Category 2', certificateFileName: null, certificateUrl: null, personnelFileName: null, personnelUrl: null }
+      { id: 1, trainingTitle: 'External Safety Course', startDate: '2024-05-12', endDate: '2024-05-12', venue: 'Vendor Hall', type: 'Training', category: 'Non-LD', certificateFileName: null, certificateUrl: null, personnelFileName: null, personnelUrl: null },
+      { id: 2, trainingTitle: 'Third-Party Data Privacy', startDate: '2024-06-20', endDate: '2024-06-20', venue: 'Remote', type: 'Workshop', category: 'LD', certificateFileName: null, certificateUrl: null, personnelFileName: null, personnelUrl: null }
     ]);
   }, [show, employeeId]);
 
   useEffect(() => {
     return () => {
-      // revoke any created object URLs on unmount
       objectUrlsRef.current.forEach(url => URL.revokeObjectURL(url));
       objectUrlsRef.current = [];
     };
@@ -85,7 +84,6 @@ const EmployeeInHouseTraining = ({ show, setShow, employeeId }) => {
     if (e && e.preventDefault) e.preventDefault();
     if (loadingSave) return;
 
-    // basic client validation
     if (!form.trainingTitle || !form.startDate || !form.venue) {
       alert('Please fill required fields: Title, Start Date, Venue.');
       return;
@@ -93,7 +91,6 @@ const EmployeeInHouseTraining = ({ show, setShow, employeeId }) => {
 
     setLoadingSave(true);
     try {
-      // prepare file preview urls for client list
       let certificateUrl = null;
       let personnelUrl = null;
       const certificateName = form.certificateFile ? form.certificateFile.name : null;
@@ -109,10 +106,8 @@ const EmployeeInHouseTraining = ({ show, setShow, employeeId }) => {
       }
 
       if (editingId) {
-        // update existing local entry (also revoke old URLs if replaced)
         setTrainings(prev => prev.map(t => {
           if (t.id !== editingId) return t;
-          // revoke old urls if they exist and new file provided
           if (form.certificateFile && t.certificateUrl) { URL.revokeObjectURL(t.certificateUrl); }
           if (form.personnelOrderFile && t.personnelUrl) { URL.revokeObjectURL(t.personnelUrl); }
           return {
@@ -126,7 +121,6 @@ const EmployeeInHouseTraining = ({ show, setShow, employeeId }) => {
           };
         }));
       } else {
-        // add new entry locally (use server id when returned)
         const newId = Date.now();
         const newEntry = {
           id: newId,
@@ -140,7 +134,7 @@ const EmployeeInHouseTraining = ({ show, setShow, employeeId }) => {
         setTrainings(prev => [newEntry, ...prev]);
       }
 
-      // TODO: POST to server with files (multipart/form-data) or file metadata
+      // TODO: POST to server (multipart/form-data) to persist files/metadata
       setShowAddForm(false);
       setEditingId(null);
     } catch (err) {
@@ -153,7 +147,6 @@ const EmployeeInHouseTraining = ({ show, setShow, employeeId }) => {
 
   const handleDelete = (id) => {
     if (!window.confirm('Delete training?')) return;
-    // revoke any object URLs associated
     const t = trainings.find(x => x.id === id);
     if (t) {
       if (t.certificateUrl) { URL.revokeObjectURL(t.certificateUrl); objectUrlsRef.current = objectUrlsRef.current.filter(u => u !== t.certificateUrl); }
@@ -165,7 +158,6 @@ const EmployeeInHouseTraining = ({ show, setShow, employeeId }) => {
   // open file in new tab — prefer server file route, fallback to object URL if present
   const handleViewFile = (fileName, fileUrl) => {
     if (fileUrl) {
-      // object URL created client-side (preview)
       window.open(fileUrl, '_blank', 'noopener');
       return;
     }
@@ -173,30 +165,28 @@ const EmployeeInHouseTraining = ({ show, setShow, employeeId }) => {
       alert('No file available');
       return;
     }
-    // server endpoint that streams file inline
-    const url = `/api/files/inhouse/${encodeURIComponent(fileName)}`;
+    const url = `/api/files/outhouse/${encodeURIComponent(fileName)}`;
     window.open(url, '_blank', 'noopener');
   };
 
-  // If parent intentionally hides this panel, do not render the content
   if (!show) return null;
 
   return (
     <>
-      <div className="iht-container">
-        <div className="iht-header">
-          <div className="iht-total" aria-live="polite" title="Total trainings attended">
-            <span className="iht-total-label">Total No. of In-house Training{trainings.length !== 1 ? 's:' : ':'}</span>
-            <span className="iht-total-count">{trainings.length}</span>
+      <div className="oht-container">
+        <div className="oht-header">
+          <div className="oht-total" aria-live="polite" title="Total trainings attended">
+            <span className="oht-total-label">Total No. of Out-house Training{trainings.length !== 1 ? 's:' : ':'}</span>
+            <span className="oht-total-count">{trainings.length}</span>
           </div>
 
-          <div className="iht-header-controls">
-            <button type="button" className="iht-add-btn" onClick={openAdd}>+ Add Training</button>
+          <div className="oht-header-controls">
+            <button type="button" className="oht-add-btn" onClick={openAdd}>+ Add Training</button>
           </div>
         </div>
 
-        <div className="iht-table-wrap">
-          <table className="iht-table">
+        <div className="oht-table-wrap">
+          <table className="oht-table">
             <thead>
               <tr>
                 <th>Title</th>
@@ -204,59 +194,58 @@ const EmployeeInHouseTraining = ({ show, setShow, employeeId }) => {
                 <th>End</th>
                 <th>Certificate</th>
                 <th>Personnel Order</th>
-                <th className="iht-actions-col">Actions</th>
+                <th className="oht-actions-col">Actions</th>
               </tr>
             </thead>
             <tbody>
               {trainings.length === 0 ? (
-                <tr><td colSpan="6" className="iht-empty">No trainings found.</td></tr>
+                <tr><td colSpan="6" className="oht-empty">No trainings found.</td></tr>
               ) : trainings.map(t => (
                 <tr key={t.id}>
-                  <td className="iht-wrap">{t.trainingTitle}</td>
-                  <td className="iht-wrap">{t.startDate}</td>
-                  <td className="iht-wrap">{t.endDate}</td>
- 
-                   <td className="iht-wrap iht-file-cell">
-                     {t.certificateUrl || t.certificateFileName ? (
-                       <button
-                         type="button"
-                         className="iht-action-btn view"
-                         onClick={() => handleViewFile(t.certificateFileName, t.certificateUrl)}
-                         title={t.certificateFileName || 'View certificate'}
-                       >
-                         <FaEye />
-                       </button>
-                     ) : (
-                       <span className="iht-no-file">—</span>
-                     )}
-                   </td>
- 
-                   <td className="iht-wrap iht-file-cell">
-                     {t.personnelUrl || t.personnelFileName ? (
-                       <button
-                         type="button"
-                         className="iht-action-btn view"
-                         onClick={() => handleViewFile(t.personnelFileName, t.personnelUrl)}
-                         title={t.personnelFileName || 'View personnel order'}
-                       >
-                         <FaEye />
-                       </button>
-                     ) : (
-                       <span className="iht-no-file">—</span>
-                     )}
-                   </td>
- 
-                   <td className="iht-actions-col">
-                     <button className="iht-action-btn update" onClick={() => openEdit(t)}><FaEdit /></button>
-                     <button className="iht-action-btn delete" onClick={() => handleDelete(t.id)}><FaTrash /></button>
-                   </td>
-                 </tr>
-               ))}
-             </tbody>
-           </table>
-         </div>
+                  <td className="oht-wrap">{t.trainingTitle}</td>
+                  <td className="oht-wrap">{t.startDate}</td>
+                  <td className="oht-wrap">{t.endDate}</td>
 
-        {/* Add / Edit modal (use div role="form" to avoid nested <form> errors) */}
+                  <td className="oht-wrap oht-file-cell">
+                    {t.certificateUrl || t.certificateFileName ? (
+                      <button
+                        type="button"
+                        className="oht-action-btn view"
+                        onClick={() => handleViewFile(t.certificateFileName, t.certificateUrl)}
+                        title={t.certificateFileName || 'View certificate'}
+                      >
+                        <FaEye />
+                      </button>
+                    ) : (
+                      <span className="oht-no-file">—</span>
+                    )}
+                  </td>
+
+                  <td className="oht-wrap oht-file-cell">
+                    {t.personnelUrl || t.personnelFileName ? (
+                      <button
+                        type="button"
+                        className="oht-action-btn view"
+                        onClick={() => handleViewFile(t.personnelFileName, t.personnelUrl)}
+                        title={t.personnelFileName || 'View personnel order'}
+                      >
+                        <FaEye />
+                      </button>
+                    ) : (
+                      <span className="oht-no-file">—</span>
+                    )}
+                  </td>
+
+                  <td className="oht-actions-col">
+                    <button className="oht-action-btn update" onClick={() => openEdit(t)}><FaEdit /></button>
+                    <button className="oht-action-btn delete" onClick={() => handleDelete(t.id)}><FaTrash /></button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
         {showAddForm && (
           <div className="employee-modal-backdrop" onClick={() => setShowAddForm(false)}>
             <div className="employee-modal" onClick={e => e.stopPropagation()}>
@@ -329,11 +318,11 @@ const EmployeeInHouseTraining = ({ show, setShow, employeeId }) => {
                   </div>
                 </div>
 
-                <div className="iht-modal-actions">
-                  <button type="button" className="add-employee-iht-btn" disabled={loadingSave} onClick={handleSave}>
+                <div className="oht-modal-actions">
+                  <button type="button" className="add-employee-oht-btn" disabled={loadingSave} onClick={handleSave}>
                     {loadingSave ? 'Saving...' : 'Save'}
                   </button>
-                  <button type="button" className="close-employee-iht-btn" onClick={() => setShowAddForm(false)}>Cancel</button>
+                  <button type="button" className="close-employee-oht-btn" onClick={() => setShowAddForm(false)}>Cancel</button>
                 </div>
               </div>
 
@@ -345,4 +334,4 @@ const EmployeeInHouseTraining = ({ show, setShow, employeeId }) => {
   );
 };
 
-export default EmployeeInHouseTraining;
+export default EmployeeOutHouseTraining;

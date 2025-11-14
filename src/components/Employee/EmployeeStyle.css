@@ -19,18 +19,26 @@
   padding: 20px;
 }
 
-.employee-header h2 {
-  margin: 0;
-  color: #333;
-}
-
 /* =========================
    Table Styles
    ========================= */
+
+.employee-card-body {
+  max-width: 100%;
+  background: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin: 20px auto;
+}
+
 .employee-table-responsive {
   width: 100%;
-  overflow-x: auto;
   height: calc(100% - 100px);
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
@@ -40,7 +48,6 @@
   border-spacing: 0;
   min-width: 600px;
   table-layout: fixed;
-  margin-top: 20px;
 }
 
 .employee-table th,
@@ -54,7 +61,8 @@
 }
 
 .employee-table th {
-  color: #555;
+  color: #fff;
+  background-color: #00994d;
   border-bottom: 2px solid #ccc;
 }
 
@@ -67,28 +75,34 @@
   width: 180px;
 }
 
-.actions-column {
-  width: 120px;
-  text-align: left;
-  white-space: nowrap;
-}
-
-.action-btn {
+.action-btn, .iht-action-btn, .oht-action-btn {
   border: none;
   background: none;
   cursor: pointer;
   margin: 0 5px;
-  font-size: 1.0.9rem;
+  font-size: 0.9rem;
   padding: 3px 3px;
   border-radius: 3px;
   transition: background-color 0.2s ease;
 }
-.action-btn.view { color: #1878e6; }
-.action-btn.view:hover { background-color: #e6f0ff; }
-.action-btn.update { color: #ffc107da; }
-.action-btn.update:hover { background-color: #fff3cd; }
-.action-btn.delete { color: #dc3546da; }
-.action-btn.delete:hover { background-color: #f8d7da; }
+.action-btn.view, .iht-action-btn.view, .oht-action-btn.view { 
+  color: #1878e6; 
+}
+.action-btn.view:hover, .iht-action-btn.view:hover, .oht-action-btn.view:hover { 
+  background-color: #e6f0ff;
+}
+.action-btn.update, .iht-action-btn.update, .oht-action-btn.update {
+   color: #ffc107da; 
+}
+.action-btn.update:hover, .iht-action-btn.update:hover, .oht-action-btn.update:hover {
+   background-color: #fff3cd; 
+}
+.action-btn.delete, .iht-action-btn.delete, .oht-action-btn.delete {
+   color: #dc3546da; 
+}
+.action-btn.delete:hover, .iht-action-btn.delete:hover, .oht-action-btn.delete:hover {
+   background-color: #f8d7da; 
+}
 
 /* =========================
    Modal Styles
@@ -195,7 +209,7 @@
   transform: scale(1.1);
 }
 
-.close-employee-btn, .close-employee-iht-btn {
+.close-employee-btn, .close-employee-iht-btn, .close-employee-oht-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -210,13 +224,14 @@
   cursor: pointer;
 }
 .close-employee-btn:hover, .close-employee-btn:focus,
-.close-employee-iht-btn:hover, .close-employee-iht-btn:focus {
+.close-employee-iht-btn:hover, .close-employee-iht-btn:focus,
+.close-employee-oht-btn:hover, .close-employee-oht-btn:focus {
   background: #dc3545;
   color: #ffffff;
   outline: none;
 }
 
-.save-employee-btn, .add-employee-iht-btn, .import-file-btn, .export-file-btn {
+.save-employee-btn, .add-employee-oht-btn, .add-employee-iht-btn, .import-file-btn, .export-file-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -231,6 +246,7 @@
 }
 .save-employee-btn:hover, .save-employee-btn:focus,
 .add-employee-iht-btn:hover, .add-employee-iht-btn:focus,
+.add-employee-oht-btn:hover, .add-employee-oht-btn:focus,
 .import-file-btn:hover, .import-file-btn:focus,
 .export-file-btn:hover, .export-file-btn:focus {
   background-color: #00994d;
@@ -360,7 +376,7 @@
   align-items: center;
   gap: 8px;
 }
-.idp-p2-add-btn, .idp-p3-add-btn, .iht-add-btn {
+.idp-p2-add-btn, .idp-p3-add-btn {
   align-items: center;
   gap: 8px;
   display:inline-flex;
@@ -402,14 +418,11 @@
   margin-top: 8px;
 }
 
-.employee-header-row {
-  margin-bottom: 20px;
-}
-
-.employee-header-row h2 {
-  margin: 0 0 8px 0;
-  color: #333;
-  font-size: 1.5rem;
+.employee-header-row{
+  display: block;
+  font-size: 1rem;
+  color: #444;
+  font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 .employee-controls-row {
@@ -417,7 +430,7 @@
   align-items: center;
   justify-content: flex-end;
   position: relative;
-  padding-right: 0;
+  padding-top: 20px;
 }
 
 /* =========================
@@ -696,7 +709,7 @@ input.dateCompleted {
 }
 
 .idp-tab.active {
-  background: #179e3b;
+  background: #00994d;
   color: #fff;
   font-weight: bold;
 }
@@ -719,11 +732,40 @@ input.dateCompleted {
   margin-top: 0 !important;
 }
 
+/* Add button (outline green, fills on hover) for both IHT and OHT */
+.oht-add-btn,
+.iht-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: #00bf63;
+  border: 1px solid #00bf63;
+  padding: 8px 14px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.oht-add-btn:hover,
+.iht-add-btn:hover {
+  background-color: #00bf63;
+  color: #ffffff;
+}
+
+/* =========================
+   OHT Specific Styles
+   ========================= */
+/* Mirror IHT rules for OHT so both components share the same layout */
+/* Add/replace the top .iht- rules with combined selectors including .oht- */
+
+.oht-container,
 .iht-container {
   margin-top: 1rem;
   font-family: inherit;
 }
 
+.oht-header,
 .iht-header {
   display: flex;
   align-items: center;
@@ -733,6 +775,7 @@ input.dateCompleted {
 }
 
 /* Total label/badge to the left of the Add button */
+.oht-total,
 .iht-total {
   display: inline-flex;
   align-items: center;
@@ -741,11 +784,13 @@ input.dateCompleted {
   font-size: 0.9rem;
 }
 
+.oht-total-label,
 .iht-total-label {
-  color: #00bf63;
+  color: #00994d;
   font-weight: 600;
 }
 
+.oht-total-count,
 .iht-total-count {
   display: inline-block;
   min-width: 28px;
@@ -758,64 +803,127 @@ input.dateCompleted {
   border: 1px solid #e2e8f0;
 }
 
-/* Table */
+/* Add button (outline green, fills on hover) for both IHT and OHT */
+.oht-add-btn,
+.iht-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: #00bf63;
+  border: 1px solid #00bf63;
+  padding: 8px 14px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.oht-add-btn:hover,
+.iht-add-btn:hover {
+  background-color: #00bf63;
+  color: #ffffff;
+}
+
+/* =========================
+   Table - OHT Specific
+   ========================= */
+/* OHT styles - mirror IHT but with oht- prefix so out-house components use same layout/look */
+.oht-table-wrap,
 .iht-table-wrap {
-  margin-top: 12px;
   overflow-x: auto;
 }
 
+.oht-table,
 .iht-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   background: #fff;
   box-shadow: 0 1px 2px rgba(0,0,0,0.03);
 }
 
+.oht-table th,
+.oht-table td,
 .iht-table th,
 .iht-table td {
+  font-size: 12px;
   padding: 10px 12px;
-  border-bottom: 1px solid #eee;
-  text-align: left;
   vertical-align: middle;
-  font-size: 0.9rem;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  border-bottom: 0.5px solid #ddd;
 }
 
+/* header bg can stay same; adjust if you want different color for oht */
+.oht-table th,
 .iht-table th {
-  background: #fafafa;
+  background: #00994d;
   font-weight: 600;
-  color: #333;
+  color: #fff;
 }
 
+.oht-actions-col,
 .iht-actions-col {
   width: 160px;
   text-align: center;
 }
 
 /* Empty state */
+.oht-empty,
 .iht-empty {
   text-align: center;
   color: #777;
   padding: 18px;
 }
 
-/* Action buttons */
-.iht-action-btn {
-  background: transparent;
-  border: 1px solid #ccc;
-  padding: 6px 8px;
-  border-radius: 3px;
-  margin-right: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-.iht-action-btn:hover { opacity: 0.95; }
+/* column width distribution (mirror IHT) */
+.oht-table th:nth-child(1),
+.oht-table td:nth-child(1),
+.iht-table th:nth-child(1),
+.iht-table td:nth-child(1) { width: 40%; } /* Title (larger) */
+.oht-table th:nth-child(2),
+.oht-table td:nth-child(2),
+.iht-table th:nth-child(2),
+.iht-table td:nth-child(2) { width: 10%; } /* Start */
+.oht-table th:nth-child(3),
+.oht-table td:nth-child(3),
+.iht-table th:nth-child(3),
+.iht-table td:nth-child(3) { width: 10%; } /* End */
+.oht-table th:nth-child(4),
+.oht-table td:nth-child(4),
+.iht-table th:nth-child(4),
+.iht-table td:nth-child(4) { width: 15%; }  /* Certificate (view button) */
+.oht-table th:nth-child(5),
+.oht-table td:nth-child(5),
+.iht-table th:nth-child(5),
+.iht-table td:nth-child(5) { width: 15%; }  /* Personnel Order (view button) */
+.oht-table th:nth-child(6),
+.oht-table td:nth-child(6),
+.iht-table th:nth-child(6),
+.iht-table td:nth-child(6) { width: 20%; }  /* Actions */
 
-.iht-action-btn.iht-delete {
-  border-color: #dc3545;
-  color: #dc3545;
+/* center file/view buttons inside their cells */
+.oht-file-cell,
+.iht-file-cell {
+  text-align: center;
+  vertical-align: middle;
 }
 
-/* Modal */
+/* ensure action column buttons are centered */
+.oht-actions-col,
+.iht-actions-col { text-align: center; }
+
+/* responsive fallback */
+@media (max-width: 640px) {
+  .oht-table,
+  .iht-table { table-layout: auto; }
+  .oht-table th, .oht-table td,
+  .iht-table th, .iht-table td { padding: 8px; font-size: 0.95rem; }
+}
+
+/* Modal (mirror IHT modal styles for OHT) */
+.oht-modal-backdrop,
 .iht-modal-backdrop {
   position: fixed;
   inset: 0;
@@ -826,6 +934,7 @@ input.dateCompleted {
   z-index: 1000;
 }
 
+.oht-modal,
 .iht-modal {
   width: 480px;
   max-width: calc(100% - 32px);
@@ -835,11 +944,13 @@ input.dateCompleted {
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 
+.oht-muted,
 .iht-muted {
   color: #665;
   margin: 8px 0 16px;
 }
 
+.oht-modal-actions,
 .iht-modal-actions {
   display: flex;
   justify-content: flex-end;
@@ -849,9 +960,9 @@ input.dateCompleted {
 
 /* Responsive tweaks */
 @media (max-width: 640px) {
-  .iht-actions-col { width: 120px; }
-  .iht-add-btn { padding: 6px 10px; }
-  .iht-table th, .iht-table td { padding: 8px 10px; font-size: 0.9rem; }
+  .iht-actions-col, .oht-actions-col { width: 120px; }
+  .iht-add-btn, .oht-actions-col { padding: 6px 10px; }
+  .iht-table th, .iht-table td, .oht-table th, .oht-table td { padding: 8px 10px; font-size: 0.9rem; }
 }
 
 /* Add this to your CSS file */
@@ -1044,5 +1155,3 @@ input.dateCompleted {
   font-weight: 500;
   transition: 0.2s;
 }
-
-

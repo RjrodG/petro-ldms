@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CompetencyAssessment from './Employee_CompetencyAssessment';
 import LearningAndDevelopment from './Employee_LearningAndDevelopmentSection';
 import InHouseTraining from './Employee_InHouseTraining';
+import OutHouseTraining from './Employee_OutHouseTraining';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { formatDateDisplay } from './Employee';
@@ -40,7 +41,9 @@ const Employee_Information = ({
   setDescription,
   competencyOptions,
   showInHouseTraining,
-  setShowInHouseTraining
+  setShowInHouseTraining,
+  showOutHouseTraining,
+  setShowOutHouseTraining
 }) => {
   const [selectedTab, setSelectedTab] = useState('idp'); // Default to IDP tab
 
@@ -609,7 +612,11 @@ const Employee_Information = ({
                 </>
               )}
               {selectedTab === 'outhouse' && (
-                <></>
+                <>
+                <OutHouseTraining
+                  show={showOutHouseTraining}
+                  />
+                </>
               )}
             </div>
           </div>

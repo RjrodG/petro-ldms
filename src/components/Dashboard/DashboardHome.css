@@ -1,5 +1,5 @@
 .dashboard-welcome {
-  padding: 20px;
+  padding: 20px 0px 0px 0px;
 }
 
 .dashboard-cards {
@@ -16,7 +16,7 @@
   margin-bottom: 24px;
   gap: 1rem;
 }
-
+s
 .dashboard-title {
   margin-left: 14px;
 }
